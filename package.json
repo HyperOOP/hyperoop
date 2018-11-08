@@ -1,0 +1,32 @@
+{
+  "name": "hyperoop",
+  "version": "0.1.0",
+  "description": "OOP-style web micro-framework over hyperapp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/algebraic-brain/hyperoop"
+  },
+  "license": "MIT",
+  "main": "dist/hyperoop.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
+    "build": "npm run bundle && npm run minify",
+    "minify": "terser -c -o dist/hyperoop.js dist/hyperoop.js"
+  },
+  "author": "Osman Bineev",
+  "devDependencies": {
+    "@types/node": "^10.9.3",
+    "rollup": "^0.67.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-typescript2": "^0.17.2",
+    "terser": "^3.10.11",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "hyperapp": "^1.2.9"
+  }
+}
