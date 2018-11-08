@@ -24,7 +24,7 @@ cd examples/todo-hist
 npm i && npm run serve
 ```
 
-Then open localhost:10001 in browser.
+Then open localhost:10001 in browser. Or simply [try it online](https://codepen.io/algebrain/pen/GwZWLg)
 
 ### Example `counter`
 
