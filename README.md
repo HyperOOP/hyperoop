@@ -28,7 +28,7 @@ Then open localhost:10001 in browser. Or simply [try it online](https://codepen.
 
 ### Example `counter`
 
-`TypeScript` code:
+`TypeScript` code ([try online](https://codepen.io/algebrain/pen/dQMWrX)):
 
 ```typescript
 import * as ui from 'hyperoop';
