@@ -2,9 +2,17 @@
 
 Hyperoop is OOP-style web micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
+## Install
+
+```bash
+npm i --save hyperoop
+```
+
 ## Examples
 
 ### Counter
+
+`TypeScript` example:
 
 ```typescript
 import * as ui from 'hyperoop';
