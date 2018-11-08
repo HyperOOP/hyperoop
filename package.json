@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/node": "^10.9.3",
     "rollup": "^0.67.0",
+    "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-typescript2": "^0.17.2",
     "terser": "^3.10.11",
