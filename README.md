@@ -12,9 +12,18 @@ npm i --save hyperoop
 
 See [examples](https://github.com/algebraic-brain/hyperoop/tree/master/examples).
 
-### Counter
+### Run example
 
-`TypeScript` example:
+```bash
+cd examples/todo-hist
+npm i && npm run serve
+```
+
+Then open localhost:10001 in browser.
+
+### Example `counter`
+
+`TypeScript` code:
 
 ```typescript
 import * as ui from 'hyperoop';
