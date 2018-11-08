@@ -14,7 +14,12 @@ See [examples](https://github.com/algebraic-brain/hyperoop/tree/master/examples)
 
 ### Run example
 
+To run `todo-hist` example:
+
 ```bash
+git clone https://github.com/algebraic-brain/hyperoop
+cd hyperoop
+npm i && npm run build
 cd examples/todo-hist
 npm i && npm run serve
 ```
