@@ -23,7 +23,7 @@
   "scripts": {
     "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
     "build": "npm run bundle && npm run minify",
-    "minify:terser": "terser -c -o dist/hyperoop.js dist/hyperoop.js",
+    "minify:terser": "terser -c -m -o dist/hyperoop.js dist/hyperoop.js",
     "minify": "npm run minify:terser"
   },
   "author": "Osman Bineev",

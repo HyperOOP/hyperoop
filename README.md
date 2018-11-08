@@ -2,6 +2,10 @@
 
 Hyperoop is OOP-style web micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
+## Status
+
+Under development
+
 ## Install
 
 ```bash
