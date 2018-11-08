@@ -10,6 +10,8 @@ npm i --save hyperoop
 
 ## Examples
 
+See [examples](https://github.com/algebraic-brain/hyperoop/tree/master/examples).
+
 ### Counter
 
 `TypeScript` example:
