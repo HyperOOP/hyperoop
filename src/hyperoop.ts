@@ -22,7 +22,7 @@ export function view<S extends object, A extends Actions<S>>(a: A, v: ()=>VNode<
     }
 }
 
-export function component<T>(f: (args: T)=>any): (args: T)=>(spin: Spin, render: Renderer)=>any {
+export function component<T>(f: (args: T)=>VNode<T>): (args: T)=>(spin: Spin, render: Renderer)=>VNode<T> {
     return (args: T)=>(spin: Spin, render: Renderer)=>f(args);
 }
 
