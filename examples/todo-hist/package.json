@@ -1,7 +1,7 @@
 {
-  "name": "hyperoop-counter",
+  "name": "hyperoop-todo-hist",
   "version": "0.1.0",
-  "description": "hyperoop counter example",
+  "description": "hyperoop todo example",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c -i src/index.tsx -o dist/index.js -m -f iife",

@@ -12,7 +12,7 @@ export default {
         resolve(),
         commonjs({
             namedExports: {
-                '../../dist/hyperoop.js': [ 'h', 'init', 'Actions', 'view', 'component' ]
+                '../../dist/hyperoop.js': [ 'h', 'init', 'Actions', 'SubActions', 'view', 'component' ]
             }
         }),
         copy({

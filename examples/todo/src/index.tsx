@@ -11,21 +11,15 @@ let Filters: {[name in FilterName]: (Item)=>boolean} = {
 };
 
 type TodoState = {
+    todos:       Item[],
     filter:      FilterName,
     input:       string,
     placeholder: string
 }
 
 class Todo extends ui.Actions<TodoState> {
-    Todos: Item[];
-
-    constructor(start: TodoState) {
-        super(start);
-        this.Todos = [];
-    }
-
     get Filtered(): Item[] {
-        return this.Todos.filter(Filters[this.State.filter]);    
+        return this.State.todos.filter(Filters[this.State.filter]);    
     }
 
     get UnusedFilters(): FilterName[] {
@@ -37,12 +31,13 @@ class Todo extends ui.Actions<TodoState> {
         let newItem = new Item({
             done:  false,
             value: this.State.input,
-            id:    this.Todos.length + 1
-        });
-
-        newItem.init(this.Renderer);
-        this.Todos.push(newItem);
-        this.State.input = "";
+            id:    this.State.todos.length + 1
+        }, this);
+    
+        this.set({
+            todos: [...this.State.todos, newItem],
+            input: ""
+        })
     }
 
     input(value: string){
@@ -55,6 +50,7 @@ class Todo extends ui.Actions<TodoState> {
 }
 
 const todo = new Todo({
+    todos:       [],
     filter:      "All",
     input:       "",
     placeholder: "Do that thing..."
@@ -66,16 +62,12 @@ type ItemState = {
     value: string
 }
 
-class Item extends ui.Actions<ItemState> {
-    toggle() {
-        this.State.done = !this.State.done;
-    }
-}
+class Item extends ui.SubActions<ItemState> {}
 
 const TodoItem = ui.component(({ item }: { item: Item }) => (
     <li
         class = {item.State.done && "done"}
-        onclick = {() => item.toggle()}
+        onclick = {() => item.State.done = !item.State.done}
     >
         { item.State.value }
     </li>

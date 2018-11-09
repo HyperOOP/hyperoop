@@ -10,8 +10,10 @@ export function make<T extends object>(target: T, after: ()=>void): T {
         },
 
         deleteProperty: (target, k) => {
-            if (k in target) delete target[k];
-            after();
+            if (k in target) {
+                delete target[k];
+                after();
+            }
             return true;
         }
     });
@@ -24,10 +26,10 @@ export function makeH<T extends object>(target: T, after: ()=>void, hist: Histor
             let was = k in target;
             let oldVal = null;
             if (was) {
-                let oldVal = target[k];
+                oldVal = target[k];
                 if (oldVal === v) return true;
             }
-            let redo = ()=>{ 
+            let redo = ()=>{
                 target[k] = v;
                 after();
             };
