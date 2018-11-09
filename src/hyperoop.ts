@@ -1,8 +1,7 @@
-import * as hyperapp  from 'hyperapp'
-import * as proxperty from './proxperty'
-import * as history   from './history'
+import * as hyperapp  from 'hyperapp';
+import * as proxperty from './proxperty';
 
-import History from './history'
+import Hist from 'redoundo';
 
 type Spin = {
     Value: boolean;
@@ -38,7 +37,7 @@ export function init(el: HTMLElement, view: View) {
 
 export interface ActionsParentI {
     readonly Renderer: Renderer ;
-    readonly History:  History;
+    readonly History:  Hist;
 }
 
 export class Actions<S extends object> {
@@ -51,14 +50,14 @@ export class Actions<S extends object> {
     get Remember(): S { return this.remember_ }
     get Renderer(): Renderer { return this.renderer_ }
     
-    readonly History:  History;
+    readonly History:  Hist;
 
-    constructor(start: S, hist: number | History = null) {
+    constructor(start: S, hist: number | Hist = null) {
         this.state_    = start;
         this.orig_     = start;
         this.remember_ = start;
         this.renderer_ = null;
-        this.History   = typeof hist === 'number' ? history.makeHistory(hist) : hist;
+        this.History   = typeof hist === 'number' ? new Hist(hist) : hist;
     }
 
     set(s: Partial<S>, remember: boolean = false) {

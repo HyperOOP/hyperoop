@@ -4,7 +4,7 @@
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
-    "url":  "https://github.com/algebraic-brain/hyperoop"
+    "url": "https://github.com/algebraic-brain/hyperoop"
   },
   "license": "MIT",
   "keywords": [
@@ -28,8 +28,8 @@
   },
   "author": "Osman Bineev",
   "devDependencies": {
-    "@types/node": "^10.9.3",
     "rollup": "^0.67.0",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-typescript2": "^0.17.2",
@@ -37,6 +37,7 @@
     "typescript": "^3.0.1"
   },
   "dependencies": {
-    "hyperapp": "^1.2.9"
+    "hyperapp": "^1.2.9",
+    "redoundo": "^0.1.2"
   }
 }

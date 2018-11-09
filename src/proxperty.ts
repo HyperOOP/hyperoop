@@ -1,4 +1,4 @@
-import History from './history'
+import Hist from 'redoundo';
 
 export function make<T extends object>(target: T, after: ()=>void): T {
     return new Proxy<T>(target, {
@@ -19,7 +19,7 @@ export function make<T extends object>(target: T, after: ()=>void): T {
     });
 }
 
-export function makeH<T extends object>(target: T, after: ()=>void, hist: History): T {
+export function makeH<T extends object>(target: T, after: ()=>void, hist: Hist): T {
     if (!hist) return null;
     return new Proxy<T>(target, {
         set: (target, k, v) => {
