@@ -11,7 +11,7 @@ export default {
         resolve(),
         commonjs({
             namedExports: {
-                '../../dist/hyperoop.js': [ 'h', 'init', 'Actions', 'view' ]
+                '../../dist/hyperoop.js': [ 'h', 'init', 'actions', 'view' ]
             }
         }),
         copy({

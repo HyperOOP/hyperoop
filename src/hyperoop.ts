@@ -1,5 +1,4 @@
 import * as hyperapp  from 'hyperapp';
-import * as proxperty from './proxperty';
 
 import Hist from 'redoundo';
 
@@ -15,93 +14,116 @@ export let h = hyperapp.h;
 export type VNode<A> = hyperapp.VNode<A>;
 export type View = hyperapp.View<Spin, Renderer>;
 
-export function view<S extends object, A extends Actions<S>>(a: A, v: ()=>VNode<object>): (spin: Spin, render: Renderer) => VNode<object>{
-    return (spin, renderer) => {
-        a.init(renderer);
-        return v();
-    }
-}
-
-export function component<T>(f: (args: T)=>any): (args: T)=>(spin: Spin, render: Renderer)=>any {
-    return (args: T)=>(spin: Spin, render: Renderer)=>f(args);
-}
-
-export function init(el: HTMLElement, view: View) {
-    let r_: Renderer = {
-        render: () => (spin: Spin) => {
-          return { Value: !spin.Value };
-        }
-    }
-    hyperapp.app({Value: true}, r_, view, el)
-}
-
-export interface ActionsParentI {
+export interface ActionsParent {
     readonly Renderer: Renderer ;
     readonly History:  Hist;
 }
 
-export class Actions<S extends object> {
-    private orig_:     S;
-    private state_:    S;
-    private remember_: S;
-    private renderer_: Renderer;
+export interface Actions<S extends object> extends ActionsParent {
+    readonly State:    S;
+    readonly Remember: S;
 
-    get State():    S { return this.state_ }
-    get Remember(): S { return this.remember_ }
-    get Renderer(): Renderer { return this.renderer_ }
-    
-    readonly History:  Hist;
+    set(s: Partial<S>, remember?: boolean);
+    init(renderer: Renderer);
+}
 
-    constructor(start: S, hist: number | Hist = null) {
-        this.state_    = start;
-        this.orig_     = start;
-        this.remember_ = start;
-        this.renderer_ = null;
-        this.History   = typeof hist === 'number' ? new Hist(hist) : hist;
-    }
+export let view = <S extends object, A extends Actions<S>>(a: A, v: ()=>VNode<object>):
+    (spin: Spin, render: Renderer) => VNode<object> =>
+        (spin, renderer) => {
+            a.init(renderer);
+            return v();
+        }
 
-    set(s: Partial<S>, remember: boolean = false) {
-        let change = Object.getOwnPropertyNames(s).filter(
-            k => !(k in this.orig_) || this.orig_[k] !== s[k]
-        ).length > 0;
-        if (!change) return;
-        if (remember && this.History) {
-            let was: Partial<S> = {};
-            for (let k in this.state_) {
-                if (k in s) was[k] = this.orig_[k];
-            }
-            let self = this;
-            this.History.add({
-                Redo: ()=>{
-                    for (let k in s) self.orig_[k] = s[k];
-                    self.Renderer.render();
+export let component = <T>(f: (args: T)=>any):
+    (args: T)=>(spin: Spin, render: Renderer) => any =>
+        (args: T)=>(spin: Spin, render: Renderer)=>f(args);
+
+export let init = (el: HTMLElement, view: View) => 
+    hyperapp.app({Value: true}, {
+        render: () => (spin: Spin) => ({ Value: !spin.Value })
+    }, view, el)
+
+export let actions = <S extends object>(start: S, hist: number | Hist = null): Actions<S> => {
+    let orig_     = start;
+    let renderer_ = null;
+    let hist_     = typeof hist === 'number' ? new Hist(hist) : hist;
+
+    let setOne = (k: keyof S, v: S[keyof S], remember: boolean = false): void => {
+        let was = k in orig_;
+        let old = was ? orig_[k] : null;
+        if (was && old === v) return;
+        if (remember) {
+            hist_.add({
+                Redo() {
+                    orig_[k] = v;
+                    renderer_.render();
                 },
-                Undo: ()=>{
-                    for (let k in was) self.orig_[k] = was[k];
-                    self.Renderer.render();
+                Undo() {
+                    if (was) orig_[k] = old;
+                    else delete orig_[k];
+                    renderer_.render();
                 }
             })
-        }
-        else {
-            for (let k in s) this.orig_[k] = s[k];
-            this.Renderer.render();
+        } else {
+            orig_[k] = v;
+            renderer_.render();
         }
     }
 
-    init(renderer: Renderer) {
-        if (this.renderer_) return;
+    return {
+        set(s: Partial<S>, remember: boolean = false) {
+            let change = Object.getOwnPropertyNames(s).filter(
+                k => !(k in orig_) || orig_[k] !== s[k]
+            ).length > 0;
+            if (!change) return;
+            if (remember && hist_) {
+                let was: Partial<S> = {};
+                for (let k in orig_) {
+                    if (k in s) was[k] = orig_[k];
+                }
+                hist_.add({
+                    Redo: ()=>{
+                        for (let k in s) orig_[k] = s[k];
+                        renderer_.render();
+                    },
+                    Undo: ()=>{
+                        for (let k in was) orig_[k] = was[k];
+                        renderer_.render();
+                    }
+                })
+            }
+            else {
+                for (let k in s) orig_[k] = s[k];
+                renderer_.render();
+            }
+        },
 
-        this.renderer_ = renderer;
-        this.state_    = proxperty.make(this.orig_, renderer.render);
-        this.remember_ = proxperty.makeH(this.orig_, renderer.render, this.History);
+        init(renderer: Renderer) {
+            renderer_ = renderer;
+        },
+
+        get History() { return hist_ },
+        get Renderer() { return renderer_ },
+        get Remember() { return new Proxy<S>(orig_, {
+                set(target: S, k: keyof S, v: S[keyof S]) {
+                    setOne(k, v, true);
+                    return true;
+                }
+            })
+        },
+        get State(): S {
+            return new Proxy<S>(orig_, {
+                set(target: S, k: keyof S, v: S[keyof S]) {
+                    setOne(k, v);
+                    return true;
+                }
+            });
+        }
     }
 }
 
-export class SubActions<S extends object> extends Actions<S> {
-    constructor(start: S, parent: ActionsParentI) {
-        super(start, parent.History);
-        if (parent.Renderer) {
-            this.init(parent.Renderer);
-        }
-    }
+export let subActions = <S extends object>(start: S, parent: ActionsParent) => {
+    let self = actions(start, parent.History);
+    if (parent.Renderer) self.init(parent.Renderer);
+    return self;
 }

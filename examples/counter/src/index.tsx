@@ -1,8 +1,6 @@
 import * as ui from 'hyperoop';
 
-class Counter extends ui.Actions<{count: number}> {}
-
-const counter = new Counter({ count: 0 });
+const counter = ui.actions({count: 0});
 
 const view = ui.view(counter, () => (
 <div>
