@@ -1,7 +1,7 @@
 # hyperoop
 
 [![Build Status](https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master)](https://travis-ci.org/algebraic-brain/hyperoop)
-[![npm version](https://badge.fury.io/js/hyperoop.svg)](https://www.npmjs.com/package/hyperoop)
+[![npm version](https://badge.fury.io/js/hyperoop.svg)](https://badge.fury.io/js/hyperoop)
 [![codecov](https://codecov.io/gh/algebraic-brain/hyperoop/branch/master/graph/badge.svg)](https://codecov.io/gh/algebraic-brain/hyperoop)
 
 
