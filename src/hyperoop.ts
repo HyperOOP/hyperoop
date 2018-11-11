@@ -138,7 +138,7 @@ export class SubActions<S extends object> extends Actions<S> {
     constructor(start: S, parent: ActionsParentI) {
         super(start, parent.History);
         if (parent.Renderer) {
-            this.init(parent.Renderer);
+            this.init({render: () => parent.Renderer.render()});
         }
     }
 }
