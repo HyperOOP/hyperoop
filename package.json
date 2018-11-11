@@ -21,6 +21,7 @@
     "src"
   ],
   "scripts": {
+    "test": "jest --coverage --no-cache --env=jsdom",
     "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
     "build": "npm run bundle && npm run minify",
     "minify:terser": "terser -c -m -o dist/hyperoop.js dist/hyperoop.js",
@@ -28,12 +29,15 @@
   },
   "author": "Osman Bineev",
   "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "jest": "^23.6.0",
     "rollup": "^0.67.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-typescript2": "^0.17.2",
     "terser": "^3.10.11",
+    "ts-jest": "^23.10.4",
     "typescript": "^3.0.1"
   },
   "dependencies": {
