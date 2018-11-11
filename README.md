@@ -1,5 +1,7 @@
 # hyperoop
 
+[![npm version](https://badge.fury.io/js/hyperoop.svg)](https://badge.fury.io/js/hyperoop)
+
 Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
 ## Status
