@@ -1,6 +1,6 @@
 # hyperoop
 
-Hyperoop is OOP-style web micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
+Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
 ## Status
 
