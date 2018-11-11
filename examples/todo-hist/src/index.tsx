@@ -70,32 +70,32 @@ type ItemState = {
 
 class Item extends ui.SubActions<ItemState> {}
 
-const TodoItem = ui.component(({ item }: { item: Item }) => (
+const TodoItem = ({ item }: { item: Item }) => (
     <li
         class = {item.State.done && "done"}
         onclick = {() => item.Remember.done = !item.State.done}
     >
         { item.State.value }
     </li>
-))
+)
 
-const FilterButton = ui.component(({ filter }: { filter: FilterName }) => (
+const FilterButton = ({ filter }: { filter: FilterName }) => (
     <span>
         <a href = "#" onclick = {() => todo.filter(filter)}>
             {filter}
         </a>
         {" "}
   </span>
-))
+)
 
-const ControlButton = ui.component(({ name, onclick }: { name: string, onclick: ()=>void }) => (
+const ControlButton = ({ name, onclick }: { name: string, onclick: ()=>void }) => (
     <span>
         <a href = "#" onclick = {onclick}>
             {name}
         </a>
         {" "}
     </span>
-))
+)
 
 const view = ui.view(todo, () => (
     <div>

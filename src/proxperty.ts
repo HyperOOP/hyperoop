@@ -1,5 +1,12 @@
 import Hist from 'redoundo';
 
+/**
+ * Creates Proxy that calls `after` callback after set or delete entries of a `target`.
+ * 
+ * 
+ * @param target target object
+ * @param after callback to execute after set or delete entries of `target`
+ */
 export function make<T extends object>(target: T, after: ()=>void): T {
     return new Proxy<T>(target, {
         set: (target, k, v) => {
@@ -19,6 +26,14 @@ export function make<T extends object>(target: T, after: ()=>void): T {
     });
 }
 
+/**
+ * Creates Proxy that calls `after` callback after set or delete entries of a `target`.
+ * Set or delete actions can be (re, un)done using `redoundo.Hist` argument.
+ * 
+ * @param target target object
+ * @param after callback to execute after set or delete entries of `target`
+ * @param hist `redoundo.Hist` object
+ */
 export function makeH<T extends object>(target: T, after: ()=>void, hist: Hist): T {
     if (!hist) return null;
     return new Proxy<T>(target, {

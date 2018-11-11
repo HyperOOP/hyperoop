@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "src"
   ],
   "scripts": {
+    "docs": "typedoc --theme markdown  --options ./typedocconfig.ts",
     "test": "jest --coverage --no-cache --env=jsdom",
     "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
     "build": "npm run bundle && npm run minify",
@@ -38,6 +39,8 @@
     "rollup-plugin-typescript2": "^0.17.2",
     "terser": "^3.10.11",
     "ts-jest": "^23.10.4",
+    "typedoc": "^0.13.0",
+    "typedoc-plugin-markdown": "^1.1.18",
     "typescript": "^3.0.1"
   },
   "dependencies": {

@@ -40,7 +40,7 @@ test("components)", done => {
 
     const actions = new Actions({ value: "foo" });
   
-    const Component = ui.component(() => (
+    const Component = () => (
         <div
             oncreate={() => {
                 expect(document.body.innerHTML).toBe("<div>foo</div>")
@@ -53,7 +53,7 @@ test("components)", done => {
         >
             {actions.State.value}
         </div>
-    ))
+    )
 
     ui.init(document.body, ui.view(actions, ()=><Component/>));
 })
@@ -78,7 +78,7 @@ test("actions in the view", done => {
 })
 
 test("returning null from a component", done => {
-    const NullComponent = ui.component(() => null);
+    const NullComponent = () => null;
   
     const view = ui.view(null, () => (
         <div
