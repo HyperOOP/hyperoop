@@ -9,6 +9,7 @@ module.exports = {
     excludePrivate: true,
     excludeProtected: true,
     excludeExternals: true,
+    excludeNotExported: true,
     name: 'timscada-core',
     ignoreCompilerErrors: true,
     listInvalidSymbolLinks: true,
