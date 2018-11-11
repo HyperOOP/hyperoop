@@ -15,9 +15,9 @@ export let h = hyperapp.h;
 export type VNode<A> = hyperapp.VNode<A>;
 export type View = hyperapp.View<Spin, Renderer>;
 
-export function view<S extends object, A extends Actions<S>>(a: A, v: ()=>VNode<object>): (spin: Spin, render: Renderer) => VNode<object>{
+export function view<S extends object, A extends Actions<S>>(a: A, v: ()=>VNode<object>): View {
     return (spin, renderer) => {
-        a.init(renderer);
+        if (a) a.init(renderer);
         return v();
     }
 }
@@ -26,13 +26,10 @@ export function component<T>(f: (args: T)=>VNode<T>): (args: T)=>(spin: Spin, re
     return (args: T)=>(spin: Spin, render: Renderer)=>f(args);
 }
 
+let renderer: Renderer = { render:()=>s=>({Value: !s.Value}) };
+
 export function init(el: HTMLElement, view: View) {
-    let r_: Renderer = {
-        render: () => (spin: Spin) => {
-          return { Value: !spin.Value };
-        }
-    }
-    hyperapp.app({Value: true}, r_, view, el)
+    hyperapp.app({Value: true}, renderer, view, el)
 }
 
 export interface ActionsParentI {
@@ -53,11 +50,9 @@ export class Actions<S extends object> {
     readonly History:  Hist;
 
     constructor(start: S, hist: number | Hist = null) {
-        this.state_    = start;
         this.orig_     = start;
-        this.remember_ = start;
-        this.renderer_ = null;
         this.History   = typeof hist === 'number' ? new Hist(hist) : hist;
+        this.init(renderer);
     }
 
     set(s: Partial<S>, remember: boolean = false) {
@@ -65,35 +60,34 @@ export class Actions<S extends object> {
             k => !(k in this.orig_) || this.orig_[k] !== s[k]
         ).length > 0;
         if (!change) return;
+        let self = this;
         if (remember && this.History) {
             let was: Partial<S> = {};
             for (let k in this.state_) {
                 if (k in s) was[k] = this.orig_[k];
             }
-            let self = this;
             this.History.add({
                 Redo: ()=>{
                     for (let k in s) self.orig_[k] = s[k];
-                    self.Renderer.render();
+                    self.renderer_.render();
                 },
                 Undo: ()=>{
                     for (let k in was) self.orig_[k] = was[k];
-                    self.Renderer.render();
+                    self.renderer_.render();
                 }
             })
         }
         else {
             for (let k in s) this.orig_[k] = s[k];
-            this.Renderer.render();
+            this.renderer_.render();
         }
     }
 
-    init(renderer: Renderer) {
-        if (this.renderer_) return;
-
-        this.renderer_ = renderer;
-        this.state_    = proxperty.make(this.orig_, renderer.render);
-        this.remember_ = proxperty.makeH(this.orig_, renderer.render, this.History);
+    init(r: Renderer) {
+        this.renderer_ = r;
+        let self = this;
+        this.state_    = proxperty.make(this.orig_, ()=>self.renderer_.render());
+        this.remember_ = proxperty.makeH(this.orig_, ()=>self.renderer_.render(), this.History);
     }
 }
 
