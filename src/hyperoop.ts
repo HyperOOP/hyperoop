@@ -86,29 +86,33 @@ export class Actions<S extends object> {
      * @param remember remember previous state using `redoundo.Hist` or not?
      */
     set(s: Partial<S>, remember: boolean = false) {
-        let change = Object.getOwnPropertyNames(s).filter(
-            k => !(k in this.orig_) || this.orig_[k] !== s[k]
-        ).length > 0;
+        let keys = Object.getOwnPropertyNames(s).filter(
+            k => !(Array.isArray(s) && k === 'length') && !((k in this.orig_) && this.orig_[k] === s[k])
+        );
+        let change = keys.length > 0;
         if (!change) return;
         let self = this;
         if (remember && this.History) {
             let was: Partial<S> = {};
-            for (let k in this.state_) {
-                if (k in s) was[k] = this.orig_[k];
+            let wasnt: string[] = [];
+            for (let k of keys) {
+                if (k in this.orig_) was[k] = this.orig_[k];
+                else wasnt.push(k);
             }
             this.History.add({
                 Redo: ()=>{
-                    for (let k in s) self.orig_[k] = s[k];
+                    for (let k of keys) self.orig_[k] = s[k];
                     self.renderer_.render();
                 },
                 Undo: ()=>{
                     for (let k in was) self.orig_[k] = was[k];
+                    for (let k of wasnt) delete self.orig_[k];
                     self.renderer_.render();
                 }
             })
         }
         else {
-            for (let k in s) this.orig_[k] = s[k];
+            for (let k of keys) this.orig_[k] = s[k];
             this.renderer_.render();
         }
     }

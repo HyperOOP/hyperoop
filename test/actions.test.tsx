@@ -137,6 +137,62 @@ test("history / set", async (done) => {
     actions.History.undo();
 })
 
+test("history / undo set new", async (done) => {
+    class HistActions extends ui.Actions<any> {
+        constructor(v) { super(v, 1); }
+        addNew() { this.set({value: 1}, true) }
+    }
+    
+    const actions = new HistActions({});
+
+    const view = ui.view(actions, () => (
+        <div
+            oncreate={() => {
+                expect(document.body.innerHTML).toBe(`<div>1</div>`);
+            }}
+            onupdate={() => {
+                expect(document.body.innerHTML).toBe(`<div></div>`);
+                done();
+            }}
+        >
+            {actions.State.value}
+        </div>
+    ))
+  
+    ui.init(document.body, view);
+    actions.addNew();
+    await utils.mockDelay();
+    actions.History.undo();
+})
+
+test("history / undo Remember new", async (done) => {
+    class HistActions extends ui.Actions<any> {
+        constructor(v) { super(v, 1); }
+        addNew() { this.Remember.value = 1 }
+    }
+    
+    const actions = new HistActions({});
+
+    const view = ui.view(actions, () => (
+        <div
+            oncreate={() => {
+                expect(document.body.innerHTML).toBe(`<div>1</div>`);
+            }}
+            onupdate={() => {
+                expect(document.body.innerHTML).toBe(`<div></div>`);
+                done();
+            }}
+        >
+            {actions.State.value}
+        </div>
+    ))
+  
+    ui.init(document.body, view);
+    actions.addNew();
+    await utils.mockDelay();
+    actions.History.undo();
+})
+
 test("history / remember", async (done) => {
     class HistActions extends ui.Actions<{value: number}> {
         constructor(v) { super(v, 1); }
