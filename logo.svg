@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (unknown)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/bosm/Documents/logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient4542"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4540" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4542"
+       id="linearGradient4544"
+       x1="46.103117"
+       y1="144.68905"
+       x2="151.0574"
+       y2="144.68905"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="439.51176"
+     inkscape:cy="594.06823"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1553"
+     inkscape:window-height="845"
+     inkscape:window-x="47"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:243.97723389px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#64a487;fill-opacity:1;stroke:#475862;stroke-width:5.0710001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="32.895569"
+       y="225.07156"
+       id="text4520"
+       transform="scale(1.0542281,0.94856133)"><tspan
+         sodipodi:role="line"
+         id="tspan4518"
+         x="32.895569"
+         y="225.07156"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:243.97998047px;font-family:Rachana;-inkscape-font-specification:'Rachana, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#64a487;fill-opacity:1;stroke:#475862;stroke-width:5.0710001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">H</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4522"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,5.2916669,7.9375004)"><flowRegion
+         id="flowRegion4524"><rect
+           id="rect4526"
+           width="80"
+           height="157.14285"
+           x="77.14286"
+           y="196.8054" /></flowRegion><flowPara
+         id="flowPara4528" /></flowRoot>    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#fcfffc;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4534"
+       width="61.587997"
+       height="23.434523"
+       x="78.411171"
+       y="132.27792"
+       ry="11.717261"
+       rx="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:39.67399979px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#475862;fill-opacity:1;stroke:none;stroke-width:0.9918499"
+       x="38.060997"
+       y="327.68445"
+       id="text4532"
+       transform="scale(2.0841214,0.47981849)"><tspan
+         sodipodi:role="line"
+         id="tspan4530"
+         x="38.060997"
+         y="327.68445"
+         style="fill:#475862;fill-opacity:1;stroke-width:0.9918499">Y</tspan></text>
+  </g>
+</svg>
