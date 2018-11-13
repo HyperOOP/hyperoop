@@ -17,6 +17,7 @@ install:
 cache:
   directories:
     - "node_modules"
+    - ".rpt2_cache"
 
 script:
   - npm test
