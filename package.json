@@ -28,7 +28,8 @@
     "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
     "build": "npm run bundle && npm run minify",
     "minify:terser": "terser -c -m -o dist/hyperoop.js dist/hyperoop.js",
-    "minify": "npm run minify:terser"
+    "minify": "npm run minify:terser",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "author": "Osman Bineev",
   "devDependencies": {
@@ -41,6 +42,7 @@
     "rollup-plugin-typescript2": "^0.17.2",
     "terser": "^3.10.11",
     "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-markdown": "^1.1.18",
     "typescript": "^3.0.1"
