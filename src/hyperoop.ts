@@ -23,6 +23,9 @@ export type VNode<A> = hyperapp.VNode<A>;
 /** The view function describes the application UI as a tree of VNodes. */
 export type View = hyperapp.View<ISpin, IRenderer>;
 
+/** A Component is a function that returns a custom VNode or View. */
+export type Component<A> = hyperapp.Component<A, ISpin, IRenderer>;
+
 /** Creates `View` object
  *
  * @param a `Actions` object
