@@ -10,7 +10,7 @@ module.exports = {
     excludeProtected: true,
     excludeExternals: true,
     excludeNotExported: true,
-    name: 'timscada-core',
+    name: 'hyperoop',
     ignoreCompilerErrors: true,
     listInvalidSymbolLinks: true,
   };
