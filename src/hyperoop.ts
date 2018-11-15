@@ -18,20 +18,20 @@ export interface IRenderer {
 export let h = hyperapp.h;
 
 /** VDOM representation of an `Element`. */
-export type VNode<A> = hyperapp.VNode<A>;
+export type VNode<A = {}> = hyperapp.VNode<A>;
 
 /** The view function describes the application UI as a tree of VNodes. */
 export type View = hyperapp.View<ISpin, IRenderer>;
 
 /** A Component is a function that returns a custom VNode or View. */
-export type Component<A> = hyperapp.Component<A, ISpin, IRenderer>;
+export type Component<A = {}> = hyperapp.Component<A, ISpin, IRenderer>;
 
 /** Creates `View` object
  *
  * @param a `Actions` object
  * @param v function that returns a VDOM tree
  */
-export function view<S extends object, A extends Actions<S>>(a: A, v: () => VNode<object>): View {
+export function view<S extends {}, A extends Actions<S>>(a: A, v: () => VNode<object>): View {
     return (spin, r) => {
         if (a) { a.init(r); }
         return v();
@@ -58,7 +58,7 @@ export interface IActionsParent {
 }
 
 /** Class of hyperoop top-level action */
-export class Actions<S extends object> {
+export class Actions<S extends {}> {
     /** state object */
     get State(): S { return this.state; }
     /** state object that remember previous states and has redo/undo functionality */
@@ -91,15 +91,19 @@ export class Actions<S extends object> {
      * @param remember remember previous state using `redoundo.Hist` or not?
      */
     public set(s: Partial<S>, remember: boolean = false) {
-        const keys = Object.getOwnPropertyNames(s).filter(
-            (k) => !(Array.isArray(s) && k === "length") && !((k in this.orig) && this.orig[k] === s[k]),
-        );
+        let keys: Array<string|number>;
+        if (Array.isArray(s)) {
+            keys = Array.from(s.keys());
+        } else {
+            keys = Object.getOwnPropertyNames(s);
+        }
+        keys = keys.filter((k) => !(k in this.orig) || this.orig[k] !== s[k]);
         const change = keys.length > 0;
         if (!change) { return; }
         const self = this;
         if (remember && this.History) {
             const was: Partial<S> = {};
-            const wasnt: string[] = [];
+            const wasnt: Array<string|number> = [];
             for (const k of keys) {
                 if (k in this.orig) {
                     was[k] = this.orig[k];
@@ -135,7 +139,7 @@ export class Actions<S extends object> {
 }
 
 /** Class of hyperoop sub-actions */
-export class SubActions<S extends object> extends Actions<S> {
+export class SubActions<S extends {}> extends Actions<S> {
 
     /** Constructs `SubActions` object inheriting `History` and `Renderer` from a parent.
      *  NOTE! If `SubActions` object created before first rendering then you will need

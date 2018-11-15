@@ -1,21 +1,22 @@
-import * as ui    from '../src/hyperoop'
+import * as ui from "../src/hyperoop";
 
-export const mockDelay = () => new Promise(resolve => setTimeout(resolve, 50));
+/* tslint:disable:typedef-whitespace max-classes-per-file forin*/
+
+export const mockDelay = () => new Promise((resolve) => setTimeout(resolve, 50));
 
 export class Actions extends ui.Actions<{value: number}> {
-    up() { this.State.value++ }
+    public up() { this.State.value++; }
 }
 
 export class AsyncActions extends Actions {
-    async upAsync(){
+    public async upAsync() {
         await mockDelay();
         this.up();
     }
 }
 
 export class FooActions extends ui.Actions<{value: number, foo: boolean}> {
-    up() { this.State.value++ }
-    foo() { this.State.foo = true }
-    upAndFoo() { this.up(); this.foo() }
+    public up() { this.State.value++; }
+    public foo() { this.State.foo = true; }
+    public upAndFoo() { this.up(); this.foo(); }
 }
-
