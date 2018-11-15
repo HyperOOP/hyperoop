@@ -3,8 +3,6 @@ import * as proxperty from "./proxperty";
 
 import Hist from "redoundo";
 
-/* tslint:disable:typedef-whitespace max-classes-per-file forin*/
-
 interface ISpin {
     Value: boolean;
 }

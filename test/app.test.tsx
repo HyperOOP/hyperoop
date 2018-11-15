@@ -2,8 +2,6 @@ import "jest";
 import * as ui from "../src/hyperoop";
 import * as utils from "./utils";
 
-/* tslint:disable:typedef-whitespace max-classes-per-file forin*/
-
 beforeEach(() => {
     document.body.innerHTML = "";
 });

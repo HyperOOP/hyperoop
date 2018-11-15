@@ -1,7 +1,5 @@
 import * as ui from "../src/hyperoop";
 
-/* tslint:disable:typedef-whitespace max-classes-per-file forin*/
-
 export const mockDelay = () => new Promise((resolve) => setTimeout(resolve, 50));
 
 export class Actions extends ui.Actions<{value: number}> {
