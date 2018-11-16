@@ -5,6 +5,7 @@
 [![npm](https://img.shields.io/npm/v/hyperoop.svg)](https://www.npmjs.com/package/hyperoop)
 [![GitHub top language](https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg)](https://github.com/algebraic-brain/hyperoop)
 [![npm](https://img.shields.io/npm/dt/hyperoop.svg)](https://www.npmjs.com/package/hyperoop)
+[![Known Vulnerabilities](https://snyk.io/test/npm/hyperoop/badge.svg)](https://snyk.io/test/npm/hyperoop)
 
 Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
