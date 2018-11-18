@@ -1,11 +1,15 @@
-# hyperoop
+<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.png?raw=true"/></p>
 
-[![Build Status](https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master)](https://travis-ci.org/algebraic-brain/hyperoop)
-[![codecov](https://codecov.io/gh/algebraic-brain/hyperoop/branch/master/graph/badge.svg)](https://codecov.io/gh/algebraic-brain/hyperoop)
-[![npm](https://img.shields.io/npm/v/hyperoop.svg)](https://www.npmjs.com/package/hyperoop)
-[![GitHub top language](https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg)](https://github.com/algebraic-brain/hyperoop)
-[![npm](https://img.shields.io/npm/dt/hyperoop.svg)](https://www.npmjs.com/package/hyperoop)
-[![Known Vulnerabilities](https://snyk.io/test/npm/hyperoop/badge.svg)](https://snyk.io/test/npm/hyperoop)
+<p align="center">
+<a href="https://travis-ci.org/algebraic-brain/hyperoop"><img src="https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/algebraic-brain/hyperoop"><img src="https://codecov.io/gh/algebraic-brain/hyperoop/branch/master/graph/badge.svg" alt="codecov"/></a>
+<a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/v/hyperoop.svg" alt="npm"/></a>
+<a href="https://github.com/algebraic-brain/hyperoop"><img src="https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg" alt="GitHub top language"/></a>
+<a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/dt/hyperoop.svg" alt="npm"/></a>
+<a href="https://snyk.io/test/npm/hyperoo"><img src="https://snyk.io/test/npm/hyperoop/badge.svg" alt="Known Vulnerabilities"/></a>
+</p>
+
+<h1 align="center">hyperoop</h1>
 
 Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
