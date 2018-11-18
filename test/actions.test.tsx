@@ -20,6 +20,28 @@ test("sync updates", (done) => {
     actions.up();
 });
 
+test("wrong update", (done) => {
+
+    const actions = new ui.Actions({value: {counter: 1}});
+    const view = ui.view(actions, () => (
+        <div
+            oncreate={() => {
+                expect(document.body.innerHTML).toBe(`<div>2</div>`);
+                actions.State.value.counter++;
+                setTimeout(done, 1000);
+            }}
+            onupdate={() => {
+                expect(true).toBe(false);
+            }}
+        >
+            {actions.State.value.counter}
+        </div>
+    ));
+
+    ui.init(document.body, view);
+    actions.State.value = {counter: actions.State.value.counter + 1};
+});
+
 test("sync updates / set", (done) => {
 
     const actions = new utils.Actions({value: 1});

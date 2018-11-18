@@ -44,13 +44,13 @@ const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
  * @param view
  */
 export function init(el: HTMLElement, v: View) {
-    hyperapp.app({Value: true}, renderer, v, el);
+    hyperapp.app({Value: true}, { ...renderer }, v, el);
 }
 
 /** Interface of a parental `Actions` */
 export interface IActionsParent {
     /** renderer that should be called for page re-rendering */
-    readonly Renderer: IRenderer ;
+    readonly Renderer: IRenderer;
     /** `redoundo.Hist` object for redo/undo functionality */
     readonly History: Hist;
 }

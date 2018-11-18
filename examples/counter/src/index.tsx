@@ -1,4 +1,4 @@
-import * as ui from 'hyperoop';
+import * as ui from "hyperoop";
 
 class Counter extends ui.Actions<{count: number}> {}
 
@@ -10,6 +10,6 @@ const view = ui.view(counter, () => (
     <button onclick={() => counter.State.count--}>-</button>
     <button onclick={() => counter.State.count++}>+</button>
 </div>
-))
+));
 
 ui.init(document.body, view);
