@@ -7,6 +7,7 @@
 <a href="https://github.com/algebraic-brain/hyperoop"><img src="https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg" alt="GitHub top language"/></a>
 <a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/dt/hyperoop.svg" alt="npm"/></a>
 <a href="https://snyk.io/test/npm/hyperoop"><img src="https://snyk.io/test/npm/hyperoop/badge.svg" alt="Known Vulnerabilities"/></a>
+<a href="https://gitter.im/hyper-oop/hyperoop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/hyper-oop/hyperoop.svg" alt="Join the chat at https://gitter.im/hyper-oop"/></a>
 </p>
 
 <h1 align="center">hyperoop</h1>
