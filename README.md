@@ -15,6 +15,8 @@ Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jor
 
 ## Status
 
+[![Join the chat at https://gitter.im/hyper-oop/Lobby](https://badges.gitter.im/hyper-oop/Lobby.svg)](https://gitter.im/hyper-oop/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Under development
 
 ## Install
