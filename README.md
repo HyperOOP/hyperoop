@@ -1,4 +1,4 @@
-<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.png?raw=true"/></p>
+<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.svg?raw=true"/></p>
 
 <p align="center">
 <a href="https://travis-ci.org/algebraic-brain/hyperoop"><img src="https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master" alt="Build Status"></a>
