@@ -6,7 +6,7 @@
 <a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/v/hyperoop.svg" alt="npm"/></a>
 <a href="https://github.com/algebraic-brain/hyperoop"><img src="https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg" alt="GitHub top language"/></a>
 <a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/dt/hyperoop.svg" alt="npm"/></a>
-<a href="https://snyk.io/test/npm/hyperoo"><img src="https://snyk.io/test/npm/hyperoop/badge.svg" alt="Known Vulnerabilities"/></a>
+<a href="https://snyk.io/test/npm/hyperoop"><img src="https://snyk.io/test/npm/hyperoop/badge.svg" alt="Known Vulnerabilities"/></a>
 </p>
 
 <h1 align="center">hyperoop</h1>
