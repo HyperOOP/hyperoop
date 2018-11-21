@@ -48,6 +48,6 @@
   },
   "dependencies": {
     "hyperapp": "^1.2.9",
-    "redoundo": "^0.1.7"
+    "redoundo": "^0.1.9"
   }
 }
