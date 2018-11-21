@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
@@ -17,31 +17,30 @@
     "framework",
     "virtual dom"
   ],
-  "main": "dist/hyperoop.js",
+  "main": "dist/hyperoop.umd.js",
+  "module": "dist/hyperoop.es.js",
+  "typings": "dist/hyperoop.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
     "docs": "typedoc --theme markdown  --options ./typedocconfig.js",
-    "test": "jest --coverage --no-cache --env=jsdom",
-    "bundle": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.js -m -f umd -n hyperoop",
-    "build": "npm run bundle && npm run minify",
-    "minify:terser": "terser -c -m -o dist/hyperoop.js dist/hyperoop.js",
-    "minify": "npm run minify:terser",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "build:es": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.es.js -m -f es -n hyperoop",
+    "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -m -f umd -n hyperoop",
+    "build:min": "rollup -c rollup.config.minify.js -i src/hyperoop.ts -o dist/hyperoop.min.js -m -f umd -n hyperoop",
+    "build": "npm run build:es && npm run build:umd && npm run build:min",
+    "test": "tsc -p tsconfig.test.json && jest --coverage --env=jsdom"
   },
   "author": "Osman Bineev",
   "devDependencies": {
-    "@types/jest": "^23.3.9",
     "jest": "^23.6.0",
     "rollup": "^0.67.0",
-    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.17.2",
-    "terser": "^3.10.11",
-    "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-markdown": "^1.1.18",
@@ -49,6 +48,6 @@
   },
   "dependencies": {
     "hyperapp": "^1.2.9",
-    "redoundo": "^0.1.4"
+    "redoundo": "^0.1.7"
   }
 }

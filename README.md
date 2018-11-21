@@ -26,17 +26,15 @@ npm i --save hyperoop
 
 ## Examples
 
-See [examples](https://github.com/algebraic-brain/hyperoop/tree/master/examples).
+See [examples](https://github.com/algebraic-brain/hyperoop-examples).
 
 ### Run example
 
 To run `todo-hist` example:
 
 ```bash
-git clone https://github.com/algebraic-brain/hyperoop
-cd hyperoop
-npm i && npm run build
-cd examples/todo-hist
+git clone https://github.com/algebraic-brain/hyperoop-examples
+cd hyperoop-examples/todo-hist
 npm i && npm run serve
 ```
 

@@ -1,21 +1,10 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
-      "target": "es6",
-      "module": "esnext",
-      "outDir": "./lib",
-      "jsx": "react",
-      "jsxFactory": "ui.h",
-      "declaration": true,
-      "sourceMap": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "lib": [
-          "es6",
-          "dom"
-      ]
+        "outDir": "test/dist",
+        "module": "commonjs"
     },
-    
     "include": [
-        "test/**/*"
-    ]
+        "src/**/*"
+    ],
 }
