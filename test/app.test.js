@@ -17,7 +17,7 @@ test("debouncing", (done) => {
 
     const actions = new Actions({value: 1});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -26,10 +26,9 @@ test("debouncing", (done) => {
                 }
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.fire();
 });
 
@@ -55,12 +54,12 @@ test("components)", (done) => {
             actions.State.value
         );
 
-    ui.init(document.body, ui.view(actions, () => Component()));
+    ui.init(document.body, () => Component(), actions);
 });
 
 test("actions in the view", (done) => {
     const actions = new utils.Actions({value: 0});
-    const view = ui.view(actions, () => {
+    const view = () => {
         if (actions.State.value < 1) {
             actions.up();
             return;
@@ -72,15 +71,15 @@ test("actions in the view", (done) => {
         });
 
         return ui.h("div", {}, actions.State.value);
-    });
+    };
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
 });
 
 test("returning null from a component", (done) => {
     const NullComponent = () => null;
 
-    const view = ui.view(null, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -89,8 +88,7 @@ test("returning null from a component", (done) => {
                 }
             },
             NullComponent()
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, null);
 });

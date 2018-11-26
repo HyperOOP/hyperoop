@@ -3,7 +3,7 @@ utils = require("./utils");
 
 test("sync updates", (done) => {
     const actions = new utils.Actions({value: 1});
-    const view = ui.view(actions, () => 
+    const view = () => 
         ui.h("div",
             {
                 oncreate: () => {
@@ -12,16 +12,15 @@ test("sync updates", (done) => {
                 }
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.up();
 });
 
 test("wrong update", (done) => {
     const actions = new ui.Actions({value: {counter: 1}});
-    const view = ui.view(actions, () => 
+    const view = () => 
         ui.h("div",
             {
                 oncreate: () => {
@@ -34,16 +33,15 @@ test("wrong update", (done) => {
                 }
             },
             actions.State.value.counter
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.State.value = {counter: actions.State.value.counter + 1};
 });
 
 test("sync updates / set", (done) => {
     const actions = new utils.Actions({value: 1});
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -52,10 +50,9 @@ test("sync updates / set", (done) => {
                 },
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.set({value: 2});
 });
 
@@ -63,7 +60,7 @@ test("sync updates array / set", (done) => {
 
     const actions = new ui.Actions([]);
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -72,17 +69,16 @@ test("sync updates array / set", (done) => {
                 }
             },
             actions.State[0]
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.set([2]);
 });
 
 test("async updates", (done) => {
     const actions = new utils.AsyncActions({value: 2});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -94,10 +90,9 @@ test("async updates", (done) => {
                 },
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.upAsync();
 });
 
@@ -119,7 +114,7 @@ test("call action within action", (done) => {
             actions.State.value
         );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.upAndFoo();
 });
 
@@ -132,7 +127,7 @@ test("sub-actions", (done) => {
     const actions = new Actions({});
     const subActions = new SubActions({value: 1}, actions);
 
-    const view = ui.view(actions, () => 
+    const view = () => 
         ui.h("div",
             {
                 oncreate: () => {
@@ -141,10 +136,9 @@ test("sub-actions", (done) => {
                 }
             },
             subActions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     subActions.up();
 });
 
@@ -156,7 +150,7 @@ test("history / set", async (done) => {
 
     const actions = new HistActions({value: 2});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -169,10 +163,9 @@ test("history / set", async (done) => {
             },
         
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.up();
     await utils.mockDelay();
     actions.History.undo();
@@ -186,7 +179,7 @@ test("history / undo set new", async (done) => {
 
     const actions = new HistActions({});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -198,10 +191,9 @@ test("history / undo set new", async (done) => {
                 },
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.addNew();
     await utils.mockDelay();
     actions.History.undo();
@@ -215,7 +207,7 @@ test("history / undo Remember new", async (done) => {
 
     const actions = new HistActions({});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -228,9 +220,9 @@ test("history / undo Remember new", async (done) => {
             },
             actions.State.value
         )
-    );
 
-    ui.init(document.body, view);
+
+    ui.init(document.body, view, actions);
     actions.addNew();
     await utils.mockDelay();
     actions.History.undo();
@@ -244,7 +236,7 @@ test("history / remember", async (done) => {
 
     const actions = new HistActions({value: 2});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -256,10 +248,9 @@ test("history / remember", async (done) => {
                 }
             },
             actions.State.value
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.up();
     await utils.mockDelay();
     actions.History.undo();
@@ -274,7 +265,7 @@ test("delete", async (done) => {
 
     const actions = new Actions({x: 1});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -283,10 +274,9 @@ test("delete", async (done) => {
                 }
             },
             Object.getOwnPropertyNames(actions.State).length
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.del();
 });
 
@@ -299,7 +289,7 @@ test("history / undo delete", async (done) => {
 
     const actions = new HistActions({x: 1});
 
-    const view = ui.view(actions, () =>
+    const view = () =>
         ui.h("div",
             {
                 oncreate: () => {
@@ -311,10 +301,9 @@ test("history / undo delete", async (done) => {
                 }
             },
             Object.getOwnPropertyNames(actions.State).length
-        )
-    );
+        );
 
-    ui.init(document.body, view);
+    ui.init(document.body, view, actions);
     actions.del();
     await utils.mockDelay();
     actions.History.undo();

@@ -21,20 +21,13 @@ export type VNode<A = {}> = hyperapp.VNode<A>;
 /** The view function describes the application UI as a tree of VNodes. */
 export type View = hyperapp.View<ISpin, IRenderer>;
 
-/** A Component is a function that returns a custom VNode or View. */
-export type Component<A = {}> = hyperapp.Component<A, ISpin, IRenderer>;
+/** Lazy VNode is a function with no argument that returns VNode */
+export type LazyVNode<A = {}> = () => VNode<A>;
 
-/** Creates `View` object
- *
- * @param a `Actions` object
- * @param v function that returns a VDOM tree
- */
-export function view<S extends {}, A extends Actions<S>>(a: A, v: () => VNode<object>): View {
-    return (spin, r) => {
-        if (a) { a.init(r); }
-        return v();
-    };
-}
+/** A Component is a function that returns a custom VNode or View. */
+export type Component<A = {}> = (attributes: A, children: Array<VNode | string>) =>
+    | VNode<A>
+    | LazyVNode<A>;
 
 const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
 
@@ -43,8 +36,12 @@ const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
  * @param el
  * @param view
  */
-export function init(el: HTMLElement, v: View) {
-    hyperapp.app({Value: true}, { ...renderer }, v, el);
+export function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A) {
+    const view = (spin, r) => {
+        if (a) { a.init(r); }
+        return v();
+    };
+    hyperapp.app({Value: true}, { ...renderer }, view, el);
 }
 
 /** Interface of a parental `Actions` */
