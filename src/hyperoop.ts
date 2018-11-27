@@ -18,20 +18,17 @@ export let h = hyperapp.h;
 /** VDOM representation of an `Element`. */
 export type VNode<A = {}> = hyperapp.VNode<A>;
 
-/** The view function describes the application UI as a tree of VNodes. */
-export type View = hyperapp.View<ISpin, IRenderer>;
-
 /** Lazy VNode is a function with no argument that returns VNode */
 export type LazyVNode<A = {}> = () => VNode<A>;
 
-/** A Component is a function that returns a custom VNode or View. */
+/** A Component is a function that returns a custom VNode. */
 export type Component<A = {}> = (attributes: A, children: Array<VNode | string>) =>
     | VNode<A>
     | LazyVNode<A>;
 
 const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
 
-/** initialize DOM element with a hyperoop `View`
+/** initialize DOM element with a virtual node and actions object
  *
  * @param el
  * @param view

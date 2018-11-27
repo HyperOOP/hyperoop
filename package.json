@@ -31,7 +31,8 @@
     "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -m -f umd -n hyperoop",
     "build:min": "rollup -c rollup.config.minify.js -i src/hyperoop.ts -o dist/hyperoop.min.js -m -f umd -n hyperoop",
     "build": "npm run build:es && npm run build:umd && npm run build:min",
-    "test": "tsc -p tsconfig.test.json && jest --coverage --env=jsdom"
+    "test": "tsc -p tsconfig.test.json && jest --coverage --env=jsdom && npm run test:ts",
+    "test:ts": "tsc -p test/ts"
   },
   "author": "Osman Bineev",
   "devDependencies": {

@@ -1,0 +1,19 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "jsx": "react",
+        "jsxFactory": "ui.h",    
+        "baseUrl": "../..",
+        "paths": {
+            "hyperoop": ["src/hyperoop.ts"]
+        },
+        "lib": [
+            "dom",
+            "es6"
+        ]
+    },
+    "include": [
+        "./index.tsx"
+    ],
+}
