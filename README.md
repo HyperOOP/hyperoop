@@ -61,3 +61,7 @@ const view = () => (
 
 ui.init(document.body, view, counter);
 ```
+
+## Router
+
+Use our [official router](https://www.npmjs.com/package/hyperoop-router)
