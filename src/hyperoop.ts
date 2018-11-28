@@ -18,10 +18,16 @@ export type VNode<A = {}> = hyperapp.VNode<A>;
 /** Lazy VNode is a function with no argument that returns VNode */
 export type LazyVNode<A = {}> = () => VNode<A>;
 
-/** A Component is a function that returns a custom VNode. */
-export type Component<A = {}> = (attributes: A, children: Array<VNode | string>) =>
-    | VNode<A>
-    | LazyVNode<A>;
+/** A ImmediateComponent is a function that returns a custom VNode. */
+export type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
+    VNode<A>;
+
+/** A LazyComponent is a function that returns a custom LazyVNode. */
+export type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
+    LazyVNode<A>;
+
+/** A Component can be lazy or immediate. */
+export type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;
 
 const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
 
