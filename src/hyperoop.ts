@@ -12,9 +12,6 @@ export interface IRenderer {
     render: () => (spin: ISpin) => ISpin;
 }
 
-/** JSX factory function, creates `VNode`s */
-export let h = hyperapp.h;
-
 /** VDOM representation of an `Element`. */
 export type VNode<A = {}> = hyperapp.VNode<A>;
 
@@ -27,6 +24,19 @@ export type Component<A = {}> = (attributes: A, children: Array<VNode | string>)
     | LazyVNode<A>;
 
 const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
+
+/** Type of child VDOM elements */
+export type Child = VNode | string | number | null;
+
+type NameType<A> = Component<A> | string;
+type Children = Array<Child | Child[]>;
+
+/** Type of jsx factory function */
+export type JSXFactory =
+    <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;
+
+/** JSX factory function, creates `VNode`s */
+export let h: JSXFactory = hyperapp.h as JSXFactory;
 
 /** initialize DOM element with a virtual node and actions object
  *
