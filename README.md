@@ -11,7 +11,7 @@
 </p>
 
 <p align="center"><a href="https://www.patreon.com/algebrain"><img src="https://img.shields.io/badge/patreon-donate-orange.svg" alt="Patreon"/></a></p>
-<p align="center"><noscript><a href="https://liberapay.com/algebrain/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript></p>
+<p align="center"><a href="https://liberapay.com/algebrain/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></p>
 
 <h1 align="center">hyperoop</h1>
 
