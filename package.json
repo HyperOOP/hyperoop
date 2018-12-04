@@ -25,7 +25,9 @@
     "src"
   ],
   "scripts": {
-    "docs": "typedoc --theme markdown  --options ./typedocconfig.js",
+    "docs:md": "typedoc --theme markdown  --options ./typedocconfig.js",
+    "docs:html": "typedoc --options ./typedocconfig.js",
+    "docs:json": "typedoc --json ./docs/docs.json ./src",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "build:es": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.es.js -m -f es -n hyperoop",
     "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -m -f umd -n hyperoop",
