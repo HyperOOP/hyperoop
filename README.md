@@ -1,5 +1,3 @@
-<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.png?raw=true"/></p>
-
 <p align="center">
 <a href="https://travis-ci.org/algebraic-brain/hyperoop"><img src="https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master" alt="Build Status"></a>
 <a href="https://codecov.io/gh/algebraic-brain/hyperoop"><img src="https://codecov.io/gh/algebraic-brain/hyperoop/branch/master/graph/badge.svg" alt="codecov"/></a>
@@ -13,7 +11,10 @@
 <p align="center"><a href="https://www.patreon.com/algebrain"><img src="https://img.shields.io/badge/patreon-donate-orange.svg" alt="Patreon"/></a></p>
 <p align="center"><a href="https://liberapay.com/algebrain/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></p>
 
+#
+<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.png?raw=true"/>
 <h1 align="center">hyperoop</h1>
+</p>
 
 Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
 
