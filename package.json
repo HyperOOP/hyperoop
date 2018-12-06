@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
@@ -32,13 +32,16 @@
     "build:es": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.es.js -m -f es -n hyperoop",
     "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -m -f umd -n hyperoop",
     "build:min": "rollup -c rollup.config.minify.js -i src/hyperoop.ts -o dist/hyperoop.min.js -m -f umd -n hyperoop",
-    "build": "npm run build:es && npm run build:umd && npm run build:min",
+    "build": "npm run clean:dist && npm run build:es && npm run build:umd && npm run build:min",
     "test": "tsc -p tsconfig.test.json && jest --coverage --env=jsdom && npm run test:ts",
-    "test:ts": "tsc -p test/ts"
+    "test:ts": "tsc -p test/ts",
+    "clean:dist": "rimraf ./dist",
+    "clean:all": "rimraf ./dist ./node_modules ./docs ./coverage ./rpt2_cache"
   },
   "author": "Osman Bineev",
   "devDependencies": {
     "jest": "^23.6.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.67.0",
     "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",

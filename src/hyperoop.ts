@@ -9,6 +9,7 @@ interface ISpin {
 
 /** Type of renderer that should be called for page re-rendering. */
 export interface IRenderer {
+    // Function that unconditionally re-renders the page
     render: () => (spin: ISpin) => ISpin;
 }
 
