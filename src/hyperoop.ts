@@ -43,7 +43,7 @@ export type JSXFactory =
     <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;
 
 /** JSX factory function, creates `VNode`s */
-export let h: JSXFactory = hyperapp.h as JSXFactory;
+export const h: JSXFactory = hyperapp.h as JSXFactory;
 
 /** initialize DOM element with a virtual node and actions object
  *
