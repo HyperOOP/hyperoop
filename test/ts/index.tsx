@@ -1,7 +1,7 @@
 import * as ui from "hyperoop";
 
 export const ref1: ui.VNode<{href: string}> = (<a href="#"/>);
-export const ref2: ui.LazyVNode<{href: string}> = () => (<a href="#"/>);
+export const ref2: ui.LazyVNode = () => (<a href="#"/>);
 export const ref3: ui.Component<{href: string}> = (a: {href: string}) => (<a/>);
 export const ref4: ui.Component<{href: string}> = (a: {href: string}) => () => (<a/>);
 export const ref5: ui.Component<{href: string}> = (a: {href: string}) => (<ref3 href={a.href}/>);

@@ -17,7 +17,7 @@ export interface IRenderer {
 export type VNode<A = {}> = hyperapp.VNode<A>;
 
 /** Lazy VNode is a function with no argument that returns VNode */
-export type LazyVNode<A = {}> = () => VNode<A>;
+export type LazyVNode = () => VNode<object>;
 
 /** A ImmediateComponent is a function that returns a custom VNode. */
 export type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
@@ -25,7 +25,7 @@ export type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode |
 
 /** A LazyComponent is a function that returns a custom LazyVNode. */
 export type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
-    LazyVNode<A>;
+    LazyVNode;
 
 /** A Component can be lazy or immediate. */
 export type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;
