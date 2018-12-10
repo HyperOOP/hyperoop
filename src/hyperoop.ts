@@ -1,67 +1,14 @@
-import * as hyperapp from "hyperapp";
+export { h, init } from "./render";
+
+import * as render from "./render";
 import * as proxperty from "./proxperty";
 
 import Hist from "redoundo";
 
-interface ISpin {
-    Value: boolean;
-}
-
-/** Type of renderer that should be called for page re-rendering. */
-export interface IRenderer {
-    /**  Function that unconditionally re-renders the page */
-    render: () => (spin: ISpin) => ISpin;
-}
-
-/** VDOM representation of an `Element`. */
-export type VNode<A = {}> = hyperapp.VNode<A>;
-
-/** Lazy VNode is a function with no argument that returns VNode */
-export type LazyVNode = () => VNode<object>;
-
-/** A ImmediateComponent is a function that returns a custom VNode. */
-export type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
-    VNode<A>;
-
-/** A LazyComponent is a function that returns a custom LazyVNode. */
-export type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
-    LazyVNode;
-
-/** A Component can be lazy or immediate. */
-export type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;
-
-const renderer: IRenderer = { render: () => (s) => ({Value: !s.Value}) };
-
-/** Type of child VDOM elements */
-export type Child = VNode | string | number | null;
-
-type NameType<A> = Component<A> | string;
-type Children = Array<Child | Child[]>;
-
-/** Type of jsx factory function */
-export type JSXFactory =
-    <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;
-
-/** JSX factory function, creates `VNode`s */
-export const h: JSXFactory = hyperapp.h as JSXFactory;
-
-/** initialize DOM element with a virtual node and actions object
- *
- * @param el
- * @param view
- */
-export function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A) {
-    const view = (spin, r) => {
-        if (a) { a.init(r); }
-        return v();
-    };
-    hyperapp.app({Value: true}, { ...renderer }, view, el);
-}
-
 /** Interface of a parental `Actions` */
 export interface IActionsParent {
     /** renderer that should be called for page re-rendering */
-    readonly Renderer: IRenderer;
+    readonly Renderer: render.IRenderer;
     /** `redoundo.Hist` object for redo/undo functionality */
     readonly History: Hist;
 }
@@ -73,7 +20,7 @@ export class Actions<S extends {}> {
     /** state object that remember previous states and has redo/undo functionality */
     get Remember(): S { return this.remember; }
     /** renderer that should be called for page re-rendering */
-    get Renderer(): IRenderer { return this.renderer; }
+    get Renderer(): render.IRenderer { return this.renderer; }
 
     /** `redoundo.Hist` object implements redo/undo functionality */
     public readonly History: Hist;
@@ -81,7 +28,7 @@ export class Actions<S extends {}> {
     private orig:     S;
     private state:    S;
     private remember: S;
-    private renderer: IRenderer;
+    private renderer: render.IRenderer;
 
     /** Construct an `Actions` object
      *
@@ -91,7 +38,7 @@ export class Actions<S extends {}> {
     constructor(start: S, hist: number | Hist = null) {
         this.orig     = start;
         this.History   = typeof hist === "number" ? new Hist(hist) : hist;
-        this.init(renderer);
+        this.init({scheduleRender:()=>{}});
     }
 
     /** Partially sets a new state
@@ -121,17 +68,17 @@ export class Actions<S extends {}> {
             this.History.add({
                 Redo: () => {
                     for (const k of keys) { self.orig[k] = s[k]; }
-                    self.renderer.render();
+                    self.renderer.scheduleRender();
                 },
                 Undo: () => {
                     for (const k in was) { self.orig[k] = was[k]; }
                     for (const k of wasnt) { delete self.orig[k]; }
-                    self.renderer.render();
+                    self.renderer.scheduleRender();
                 },
             });
         } else {
             for (const k of keys) { this.orig[k] = s[k]; }
-            this.renderer.render();
+            this.renderer.scheduleRender();
         }
     }
 
@@ -139,11 +86,11 @@ export class Actions<S extends {}> {
      *
      * @param r
      */
-    public init(r: IRenderer) {
+    public init(r: render.IRenderer) {
         this.renderer = r;
         const self    = this;
-        this.state    = proxperty.make(this.orig, () => self.renderer.render());
-        this.remember = proxperty.makeH(this.orig, () => self.renderer.render(), this.History);
+        this.state    = proxperty.make(this.orig, () => self.renderer.scheduleRender());
+        this.remember = proxperty.makeH(this.orig, () => self.renderer.scheduleRender(), this.History);
     }
 }
 
@@ -160,7 +107,7 @@ export class SubActions<S extends {}> extends Actions<S> {
     constructor(start: S, parent: IActionsParent) {
         super(start, parent.History);
         if (parent.Renderer) {
-            this.init({render: () => parent.Renderer.render()});
+            this.init({scheduleRender: () => parent.Renderer.scheduleRender()});
         }
     }
 }

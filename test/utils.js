@@ -1,4 +1,4 @@
-ui = require("./dist/hyperoop");
+const ui = require("./dist/hyperoop");
 
 const mockDelay = () => new Promise((resolve) => setTimeout(resolve, 50));
 

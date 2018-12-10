@@ -1,11 +1,11 @@
-ui = require("./dist/hyperoop");
-utils = require("./utils");
+const ui = require("./dist/hyperoop");
+const utils = require("./utils");
 
 beforeEach(() => {
     document.body.innerHTML = "";
 });
 
-test("debouncing", (done) => {
+test("debouncing", async (done) => {
     class Actions extends utils.Actions {
         fire() {
             this.up();
@@ -32,7 +32,7 @@ test("debouncing", (done) => {
     actions.fire();
 });
 
-test("components)", (done) => {
+test("components", (done) => {
     class Actions extends ui.Actions {
         update() { this.State.value = "bar"; }
     }

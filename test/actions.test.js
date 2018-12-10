@@ -1,7 +1,7 @@
-ui = require("./dist/hyperoop");
-utils = require("./utils");
+const ui = require("./dist/hyperoop");
+const utils = require("./utils");
 
-test("sync updates", (done) => {
+test("sync updates simple", (done) => {
     const actions = new utils.Actions({value: 1});
     const view = () => 
         ui.h("div",
