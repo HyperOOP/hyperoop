@@ -16,7 +16,7 @@
 <h1 align="center">hyperoop</h1>
 </p>
 
-Hyperoop is OOP-style SPA micro-framework over [hyperapp](https://github.com/jorgebucaran/hyperapp)
+Hyperoop is OOP-style SPA micro-framework.
 
 ## Status
 
