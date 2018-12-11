@@ -36,10 +36,11 @@ function isChildren(x: ChildLike): x is ChildVNode {
     return !(x as ChildVNode[]).pop;
 }
 
-export type JSXFactory = <A>(
-    name: Component<A> | string,
+
+export function h<A>(
+    name: string,
     attributes?: A,
-    ...rest: Array<ChildLike>) => VNode<A> | LazyVNode;
+    ...rest: Array<ChildLike>): VNode<A>;
 
 /** The soft way to create a VNode.
  * @param name      An element name or a Component function
@@ -80,6 +81,8 @@ export function h<A>(
 
     return node;
 }
+
+export type JSXFactory = typeof h;
   
 namespace utils {
 
