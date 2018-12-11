@@ -410,7 +410,7 @@ namespace utils {
         private patch(parent: ChildNode, element: ChildNode, oldNode: ChildVNode, node: ChildVNode, isSvg: boolean = false) {
             if (node === oldNode) return element;
     
-            if (oldNode == null || (isVNode(oldNode) && isVNode(node) && oldNode.nodeName !== node.nodeName)) {
+            if (oldNode == null || ((oldNode as any).nodeName !== (node as any).nodeName)) {
                 element = this.patchNewNode(parent, element, oldNode, node, isSvg)
             } else if ((!isVNode(oldNode) || oldNode.nodeName == null) && !isVNode(node)) {
                 element.nodeValue = ""+node
