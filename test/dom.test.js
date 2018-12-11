@@ -1,29 +1,28 @@
 const ui = require("./dist/hyperoop");
 
-const testVdomToHtml = (name, trees) => {
-    test(name, done => {
+const testVdomToHtml = (name, trees) => {  
+      test(name, done => {
         class Actions extends ui.Actions {
-            up() { this.State.index++ }
-            next() {
-                expect(document.body.innerHTML).toBe(
-                    `<main>${trees[this.State.index].html.replace(/\s{2,}/g, "")}</main>`
-                );
-    
-                if (this.State.index === trees.length - 1) {
-                    return done();
-                }
-    
-                actions.up();
-            }
+          next() {
+              expect(document.body.innerHTML).toBe(
+                  `<main>${trees[this.State.index].html.replace(/\s{2,}/g, "")}</main>`
+              );
+        
+              if (this.State.index === trees.length - 1) {
+                  return done();
+              }
+        
+              this.State.index++;
+          }
         }
 
         const actions = new Actions({index: 0});
 
         const view = () => {
-            return ui.h("main", { 
-                oncreate: actions.next.bind(actions),
-                onupdate: actions.next.bind(actions)},
-                trees[actions.State.index].vdom)
+            return (
+              <main oncreate={actions.next.bind(actions)} onupdate={actions.next.bind(actions)}>
+                {trees[actions.State.index].vdom}
+              </main>)
         }
 
         ui.init(document.body, view, actions);

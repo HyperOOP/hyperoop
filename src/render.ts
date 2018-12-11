@@ -1,39 +1,40 @@
-export interface Attrs {
-    key?: string;
-}
 
 /** The VDOM representation of an HTMLElement.
  */
-export interface VNode<A extends Attrs = {}> {
+export interface VNode<A = {}> {
     nodeName: string
     attributes?: A
-    children: Array<VNodeLike>
+    children: Array<ChildVNode>
     key?: string
 }
 
-export type VNodeLike<A extends Attrs = {}> = string | VNode<A>;
-
 /** A ImmediateComponent is a function that returns a custom VNode. */
-export type ImmediateComponent<A extends Attrs = {}> = (attributes: A, children: Array<VNode | string>) =>
+export type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
     VNode<A>;
 
 /** A LazyComponent is a function that returns a custom LazyVNode. */
-export type LazyComponent<A extends Attrs = {}> = (attributes: A, children: Array<VNode | string>) =>
+export type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) =>
     LazyVNode;
 
 /** A Component can be lazy or immediate. */
-export type Component<A extends Attrs = {}> = LazyComponent<A> | ImmediateComponent<A>;
+export type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;
 
 /**
  * Possibles children types
  */
-export type Children = VNode | string | number | null
+export type ChildVNode<A = {}> = VNode<A> | string | number | null
 
 
 /** The view function describes the application UI as a tree of VNodes.
  * @returns A VNode tree.
  */
 export type LazyVNode = () => VNode<object>;
+
+export type ChildLike = ChildVNode | ChildVNode[];
+
+function isChildren(x: ChildLike): x is ChildVNode {
+    return !(x as ChildVNode[]).pop;
+}
 
 /** The soft way to create a VNode.
  * @param name      An element name or a Component function
@@ -42,21 +43,21 @@ export type LazyVNode = () => VNode<object>;
  * @returns A VNode tree.
  *
  */
-export function h<A extends Attrs>(
+export function h<A>(
     name: Component<A> | string,
     attributes?: A,
-    ...rest: Array<Children | Children[]>): VNode<A> | LazyVNode {
-
-    let ch = [] 
+    ...rest: Array<ChildLike>): VNode<A> | LazyVNode {
+       
+    let ch = [];
+    rest.reverse();
   
     while (rest.length) {
-        let node = rest.pop()
-        if (node && (node as Children[]).pop) {
-            for (length = (node as Children[]).length; length--; ) {
-                rest.push(node[length])
+        let node = rest.pop();
+        if (node && !isChildren(node)) {
+            for (let i = node.length - 1; i >= 0; i--) {
+                rest.push(node[i]);
             }
-        } else if (node != null) {
-            if (typeof node === "number") node = "" + node;
+        } else if (node != null && (node as any as boolean) !== true && (node as any as boolean) !== false) {
             ch.push(node)
         }
     }
@@ -65,18 +66,20 @@ export function h<A extends Attrs>(
         return name(attributes || ({} as A), ch);
     }
   
-    return {
+    const node = {
         nodeName: name,
         attributes: attributes || ({} as A),
         children: ch,
-        key: attributes && attributes.key
+        key: attributes && (attributes as any).key
     }
+
+    return node;
 }
   
 namespace utils {
 
-    function isVNode<A extends Attrs>(n: VNodeLike<A>): n is VNode<A> {
-        return typeof n !== "string";
+    function isVNode<A>(n: ChildVNode<A>): n is VNode<A> {
+        return !!(n as VNode<A>).nodeName;
     }
     
     interface HTMLElementExt extends HTMLElement {
@@ -104,7 +107,7 @@ namespace utils {
         }
     }
 
-    function resolveNode(node: string | VNode | LazyVNode) {
+    function resolveNode(node: ChildVNode | LazyVNode) {
         return typeof node === "function"
             ? resolveNode(node())
             : node != null
@@ -112,7 +115,7 @@ namespace utils {
                 : ""
     }
 
-    function getKey(node: VNodeLike) {
+    function getKey(node: ChildVNode) {
         return node && isVNode(node) ? node.key : null
     }
     
@@ -184,7 +187,7 @@ namespace utils {
         }
     }
     
-    function removeChildren(element: ChildNode, node: string | VNode): ChildNode {
+    function removeChildren(element: ChildNode, node: ChildVNode): ChildNode {
         if (isVNode(node)) {
             let attributes = node.attributes;
             for (let i = 0; i < node.children.length; i++) {
@@ -198,7 +201,7 @@ namespace utils {
         return element
     }
     
-    function removeElement(parent: ChildNode, element: ChildNode, node: VNodeLike) {
+    function removeElement(parent: ChildNode, element: ChildNode, node: ChildVNode) {
         function done() {
             parent.removeChild(removeChildren(element, node))
         }
@@ -226,7 +229,6 @@ namespace utils {
             this.view = view;
             this.rootElement = (container && container.children[0]) || null
             this.oldNode = this.rootElement && elementToVNode(this.rootElement)
-            this.isRecycling = true;
             this.action = action;
         }
 
@@ -257,10 +259,10 @@ namespace utils {
             }
         }
 
-        private createElement(node: VNodeLike, isSvg: boolean) {
+        private createElement(node: ChildVNode, isSvg: boolean) {
             let element: HTMLElement | SVGElement | Text = null;
-            if (typeof node === "string") {
-                element = document.createTextNode(node)
+            if (typeof node === "string" || typeof node === "number") {
+                element = document.createTextNode(""+node)
             } else if (isSvg = isSvg || node.nodeName === "svg") {
                 element = document.createElementNS("http://www.w3.org/2000/svg", node.nodeName)
             } else {
@@ -292,10 +294,10 @@ namespace utils {
             return element;
         }
 
-        private updateElement<A extends Attrs>(element: ChildNode, oldAttributes: A, attributes: A, isSvg: boolean) {
+        private updateElement<A>(element: ChildNode, oldAttributes: A, attributes: A, isSvg: boolean) {
             for (let name in clone(oldAttributes, attributes)) {
-                const needUpdate = attributes[name] === 
-                    (name === "value" || name === "checked") ? element[name] : oldAttributes[name];
+                const needUpdate = attributes[name] !== 
+                    (name === "value" || name === "checked" ? element[name] : oldAttributes[name]);
 
                 if (needUpdate) {
                     updateAttribute(element as HTMLElementExt, name, attributes[name], oldAttributes[name], isSvg)
@@ -308,10 +310,10 @@ namespace utils {
             }
         }
 
-        private patchNewNode(parent: ChildNode, element: ChildNode, oldNode: VNodeLike, node: VNodeLike, isSvg: boolean): ChildNode {
+        private patchNewNode(parent: ChildNode, element: ChildNode, oldNode: ChildVNode, node: ChildVNode, isSvg: boolean): ChildNode {
             let newElement = this.createElement(node, isSvg)
-            parent.insertBefore(newElement, element)
-  
+            parent.insertBefore(newElement, element);
+
             if (oldNode != null) {
                 removeElement(parent, element, oldNode)
             }
@@ -319,100 +321,107 @@ namespace utils {
             return newElement;
         }
 
-        private patch(parent: ChildNode, element: ChildNode, oldNode: VNodeLike, node: VNodeLike, isSvg: boolean = false) {
-            if (node === oldNode) return;
+        private patchChildren(element: ChildNode, oldNode: VNode, node: VNode, isSvg: boolean = false): ChildNode {
+            this.updateElement(element, oldNode.attributes, node.attributes,
+                (isSvg = isSvg || node.nodeName === "svg")
+            )
+
+            let oldKeyed = {}
+            let newKeyed = {}
+            let oldElements = []
+            let oldChildren = oldNode.children
+            let children = node.children
+
+            for (let i = 0; i < oldChildren.length; i++) {
+                oldElements[i] = element.childNodes[i]
+
+                let oldKey = getKey(oldChildren[i])
+                if (oldKey != null) {
+                    oldKeyed[oldKey] = [oldElements[i], oldChildren[i]]
+                }
+            }
+
+            let i = 0;
+            let k = 0;
+
+            while (k < children.length) {
+                let oldKey = getKey(oldChildren[i])
+                let newKey = getKey((children[k] = resolveNode(children[k])))
+
+                if (newKeyed[oldKey]) {
+                    i++
+                    continue
+                }
+
+                if (newKey != null && newKey === getKey(oldChildren[i + 1])) {
+                    if (oldKey == null) {
+                        removeElement(element, oldElements[i], oldChildren[i])
+                    }
+                    i++
+                    continue
+                }
+
+                if (newKey == null || this.isRecycling) {
+                    if (oldKey == null) {
+                        this.patch(element, oldElements[i], oldChildren[i], children[k], isSvg)
+                        k++
+                    }
+                    i++
+                } else {
+                    let keyedNode = oldKeyed[newKey] || []
+
+                    if (oldKey === newKey) {
+                        this.patch(element, keyedNode[0], keyedNode[1], children[k], isSvg)
+                        i++
+                    } else if (keyedNode[0]) {
+                        var el = element.insertBefore(keyedNode[0], oldElements[i]);
+                        this.patch(
+                            element,
+                            el,
+                            keyedNode[1],
+                            children[k],
+                            isSvg
+                        )
+                    } else {
+                        this.patch(element, oldElements[i], null, children[k], isSvg)
+                    }
+
+                    newKeyed[newKey] = children[k]
+                    k++
+                }
+            }
+
+            while (i < oldChildren.length) {
+                if (getKey(oldChildren[i]) == null) {
+                    removeElement(element, oldElements[i], oldChildren[i])
+                }
+                i++
+            }
+
+            for (let i in oldKeyed) {
+                if (!newKeyed[i]) {
+                    removeElement(element, oldKeyed[i][0], oldKeyed[i][1])
+                }
+            }
+
+            return element;
+        }
+
+        private patch(parent: ChildNode, element: ChildNode, oldNode: ChildVNode, node: ChildVNode, isSvg: boolean = false) {
+            if (node === oldNode) return element;
     
             if (oldNode == null || (isVNode(oldNode) && isVNode(node) && oldNode.nodeName !== node.nodeName)) {
                 element = this.patchNewNode(parent, element, oldNode, node, isSvg)
             } else if ((!isVNode(oldNode) || oldNode.nodeName == null) && !isVNode(node)) {
-                element.nodeValue = node
+                element.nodeValue = ""+node
             } else if (isVNode(node) && isVNode(oldNode)) {
-                this.updateElement(element, oldNode.attributes, node.attributes,
-                    (isSvg = isSvg || node.nodeName === "svg")
-                )
-
-                let oldKeyed = {}
-                let newKeyed = {}
-                let oldElements = []
-                let oldChildren = oldNode.children
-                let children = node.children
-
-                for (let i = 0; i < oldChildren.length; i++) {
-                    oldElements[i] = element.childNodes[i]
-
-                    let oldKey = getKey(oldChildren[i])
-                    if (oldKey != null) {
-                        oldKeyed[oldKey] = [oldElements[i], oldChildren[i]]
-                    }
-                }
-
-                let i = 0;
-                let k = 0;
-
-                while (k < children.length) {
-                    let oldKey = getKey(oldChildren[i])
-                    let newKey = getKey((children[k] = resolveNode(children[k])))
-
-                    if (newKeyed[oldKey]) {
-                        i++
-                        continue
-                    }
-
-                    if (newKey != null && newKey === getKey(oldChildren[i + 1])) {
-                        if (oldKey == null) {
-                            removeElement(element, oldElements[i], oldChildren[i])
-                        }
-                        i++
-                        continue
-                    }
-
-                    if (newKey == null || this.isRecycling) {
-                        if (oldKey == null) {
-                            this.patch(element, oldElements[i], oldChildren[i], children[k], isSvg)
-                            k++
-                        }
-                        i++
-                    } else {
-                        let keyedNode = oldKeyed[newKey] || []
-
-                        if (oldKey === newKey) {
-                            this.patch(element, keyedNode[0], keyedNode[1], children[k], isSvg)
-                            i++
-                        } else if (keyedNode[0]) {
-                            this.patch(
-                                element,
-                                element.insertBefore(keyedNode[0], oldElements[i]),
-                                keyedNode[1],
-                                children[k],
-                                isSvg
-                            )
-                        } else {
-                            this.patch(element, oldElements[i], null, children[k], isSvg)
-                        }
-
-                        newKeyed[newKey] = children[k]
-                        k++
-                    }
-                }
-
-                while (i < oldChildren.length) {
-                    if (getKey(oldChildren[i]) == null) {
-                        removeElement(element, oldElements[i], oldChildren[i])
-                    }
-                    i++
-                }
-
-                for (let i in oldKeyed) {
-                    if (!newKeyed[i]) {
-                        removeElement(element, oldKeyed[i][0], oldKeyed[i][1])
-                    }
-                }
+                element = this.patchChildren(element, oldNode, node, isSvg);
+            } else {
+                throw new Error("Mom, what this 'patch' wants???")
             }
             return element
         }  
-  
     }
-
 }
 
 export interface IRenderer {

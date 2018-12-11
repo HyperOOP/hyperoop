@@ -46,13 +46,13 @@ ui.init(document.body, view, actions);
 
 actions.State.x = "OK";
 actions.Remember.x = "OK";
-actions.Renderer.render();
+actions.Renderer.scheduleRender();
 actions.set({x: "OK"});
 actions.History.redo();
 actions.History.undo();
 actions.sub.State.y = "OK";
 actions.sub.Remember.y = "OK";
-actions.sub.Renderer.render();
+actions.sub.Renderer.scheduleRender();
 actions.sub.init(actions.Renderer);
 actions.sub.set({y: "OK"});
 actions.sub.History.redo();

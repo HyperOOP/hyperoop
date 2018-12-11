@@ -1,4 +1,4 @@
-export { h, init } from "./render";
+export { h, init, VNode, LazyVNode, Component } from "./render";
 
 import * as render from "./render";
 import * as proxperty from "./proxperty";
