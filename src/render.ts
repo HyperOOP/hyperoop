@@ -42,6 +42,11 @@ export function h<A>(
     attributes?: A,
     ...rest: Array<ChildLike>): VNode<A>;
 
+export function h<A>(
+    name: Component<A>,
+    attributes?: A,
+    ...rest: Array<ChildLike>): VNode<A> | LazyVNode;
+
 /** The soft way to create a VNode.
  * @param name      An element name or a Component function
  * @param attributes     Any valid HTML atributes, events, styles, and meta data
