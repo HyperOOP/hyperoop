@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
