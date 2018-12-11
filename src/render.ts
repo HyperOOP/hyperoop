@@ -36,6 +36,11 @@ function isChildren(x: ChildLike): x is ChildVNode {
     return !(x as ChildVNode[]).pop;
 }
 
+export type JSXFactory = <A>(
+    name: Component<A> | string,
+    attributes?: A,
+    ...rest: Array<ChildLike>) => VNode<A> | LazyVNode;
+
 /** The soft way to create a VNode.
  * @param name      An element name or a Component function
  * @param attributes     Any valid HTML atributes, events, styles, and meta data

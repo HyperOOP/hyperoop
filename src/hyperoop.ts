@@ -1,4 +1,14 @@
-export { h, init, VNode, LazyVNode, Component } from "./render";
+export { 
+    h, 
+    init, 
+    VNode,
+    JSXFactory, 
+    LazyVNode, 
+    ImmediateComponent,
+    LazyComponent, 
+    Component,
+    IRenderer,
+} from "./render";
 
 import * as render from "./render";
 import * as proxperty from "./proxperty";
