@@ -1,11 +1,12 @@
 {
   "name": "hyperoop",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
     "url": "https://github.com/algebraic-brain/hyperoop"
   },
+  "homepage": "https://hyperoop.github.io",
   "license": "MIT",
   "keywords": [
     "hyperapp",
