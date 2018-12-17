@@ -1,5 +1,5 @@
 
-/** The VDOM representation of an HTMLElement. */
+/** The VDOM representation of an `HTMLElement`. */
 export interface IVirtualNode<A = {}> {
     nodeName:    string;
     attributes?: A;
@@ -7,48 +7,50 @@ export interface IVirtualNode<A = {}> {
     key?:        string;
 }
 
-/** A ImmediateComponent is a function that returns a custom VNode. */
+/** This is a lazy analog of `IVirtualNode`. The difference between two is that the lazy
+ *  virtual node calculates its properties immediately before rendering of the corresponding
+ *  DOM node, while any instance of `IVirtualNode` is known in the very beginning of the rendering.
+ */
+export type LazyVirtualNode = () => IVirtualNode;
+
+/** Plain component is a function that returns a custom `IVirtualNode`. */
 export type PlainComponent<A = {}> = (attributes: A, children: ChildVirtualNode[]) =>
     IVirtualNode<A>;
 
-/** A LazyComponent is a function that returns a custom LazyVNode. */
+/** Lazy component function that returns a custom `LazyVirtualNode`. */
 export type LazyComponent<A = {}> = (attributes: A, children: ChildVirtualNode[]) =>
     LazyVirtualNode;
 
-/** A Component can be lazy or immediate. */
+/** A component can be plain or lazy. */
 export type Component<A = {}> = LazyComponent<A> | PlainComponent<A>;
 
-/** Possible types of child nodes */
+/** Possible types of child nodes of VDOM tree. */
 export type ChildVirtualNode<A = {}> = IVirtualNode<A> | string | number | null;
 
-/** The view function describes the application UI as a tree of VNodes.
- * @returns A VNode tree.
- */
-export type LazyVirtualNode = () => IVirtualNode<object>;
-
-type ChildLike = ChildVirtualNode | ChildVirtualNode[];
+/** Type of JSX Factory's `children` argument. */
+export type ChildLike = ChildVirtualNode | ChildVirtualNode[];
 
 function isChildren(x: ChildLike): x is ChildVirtualNode {
     return !(x as ChildVirtualNode[]).pop;
 }
 
+/** A JSX factory function that creates an `IVirtualNode` based on a given `name`, which
+ * can be of type `string` or `PlainComponent`, an optional `attributes` and a `children`
+ * argument  that describes some set of child virtual nodes.
+ */
 export function h<A>(
     name: string | PlainComponent<A>,
     attributes?: A,
-    ...rest: ChildLike[]): IVirtualNode<A>;
+    ...children: ChildLike[]): IVirtualNode<A>;
 
+/** A JSX factory function that creates an `LazyVirtualNode` based on `comp` -- a given `LazyComponent`,
+ *  an optional `attributes` and a `children` argument that describes some set of child virtual nodes.
+ */
 export function h<A>(
     comp: LazyComponent<A>,
     attributes?: A,
-    ...rest: ChildLike[]): LazyVirtualNode;
+    ...children: ChildLike[]): LazyVirtualNode;
 
-/** The soft way to create a VNode.
- * @param name      An element name or a Component function
- * @param attributes     Any valid HTML atributes, events, styles, and meta data
- * @param children  The children of the VNode
- * @returns A VNode tree.
- *
- */
 export function h<A>(
     name: string | Component<A>,
     attributes?: A,

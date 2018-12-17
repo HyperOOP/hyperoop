@@ -347,7 +347,7 @@ export class Renderer {
     }
 }
 
-/** Renderer interface. You may use it in order to manually shedule re-rendering. */
+/** You may use this interface in order to manually schedule re-rendering. */
 export interface IRenderer {
     scheduleRender();
 }

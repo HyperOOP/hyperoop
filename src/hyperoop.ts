@@ -15,13 +15,11 @@ export {Actions, IActionsParent, SubActions} from "./actions";
 import { IActionInitializer, IRenderer, Renderer } from "./render";
 import { LazyVirtualNode } from "./vdom";
 
-/** The init() call creates and renders a new application.
- *
- * @param container The DOM element where the app will be rendered to.
- * @param view The view function.
- * @returns The actions wired to the application.
+/** Initialize DOM element `container` with virtual node `view` and optional
+ *  `Actions` object `actions`. Calling this function is the only and necessary
+ *  method of attaching a virtual tree to a DOM element.
  */
-export function init(container: HTMLElement, view: LazyVirtualNode, action: IActionInitializer): IRenderer {
+export function init(container: HTMLElement, view: LazyVirtualNode, action?: IActionInitializer): IRenderer {
     const renderer = new Renderer(container, view, action);
     renderer.scheduleRender();
     return renderer;
