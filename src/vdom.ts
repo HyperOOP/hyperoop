@@ -1,9 +1,19 @@
 
 /** The VDOM representation of an `HTMLElement`. */
 export interface IVirtualNode<A = {}> {
+    /** Name of node, for example `div`, `span`, `table`, etc... */
     nodeName:    string;
+    /** Attributes of virtual HTML node, like `href` in `<a href="#"></a>` */
     attributes?: A;
+    /** Child HTML nodes, for example `<span>Text</span>` is child node of
+     * ```html
+     * <div>
+     *   <span>Text</span>
+     * </div>
+     * ```
+     */
     children:    ChildVirtualNode[];
+    /** This is the special attribute that helps to identify nodes while DOM updates */
     key?:        string;
 }
 

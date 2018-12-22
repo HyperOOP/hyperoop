@@ -347,8 +347,9 @@ export class Renderer {
     }
 }
 
-/** You may use this interface in order to manually schedule re-rendering. */
+/** IMplementations of this interface can be used in order to manually schedule redraw. */
 export interface IRenderer {
+    /** Function that schedules rendering */
     scheduleRender();
 }
 
