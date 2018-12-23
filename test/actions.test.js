@@ -1,5 +1,6 @@
 const ui = require("./dist/hyperoop");
 const utils = require("./utils");
+const Hist = require("redoundo")
 
 test("sync updates simple", (done) => {
     const actions = new utils.Actions({value: 1});
@@ -144,7 +145,7 @@ test("sub-actions", (done) => {
 
 test("history / set", async (done) => {
     class HistActions extends ui.Actions {
-        constructor(v) { super(v, 1); }
+        constructor(v) { super(v, new Hist(1)); }
         up() { this.set({value: this.State.value + 1}, true); }
     }
 
@@ -173,7 +174,7 @@ test("history / set", async (done) => {
 
 test("history / undo set new", async (done) => {
     class HistActions extends ui.Actions {
-        constructor(v) { super(v, 1); }
+        constructor(v) { super(v, new Hist(1)); }
         addNew() { this.set({value: 1}, true); }
     }
 
@@ -201,7 +202,7 @@ test("history / undo set new", async (done) => {
 
 test("history / undo Remember new", async (done) => {
     class HistActions extends ui.Actions {
-        constructor(v) { super(v, 1); }
+        constructor(v) { super(v, new Hist(1)); }
         addNew() { this.Remember.value = 1; }
     }
 
@@ -230,7 +231,7 @@ test("history / undo Remember new", async (done) => {
 
 test("history / remember", async (done) => {
     class HistActions extends ui.Actions {
-        constructor(v) { super(v, 1); }
+        constructor(v) { super(v, new Hist(1)); }
         up() { this.Remember.value++; }
     }
 
@@ -283,7 +284,7 @@ test("delete", async (done) => {
 test("history / undo delete", async (done) => {
     const key = "x";
     class HistActions extends ui.Actions {
-        constructor(v) { super(v, 1); }
+        constructor(v) { super(v, new Hist(1)); }
         del() { delete this.Remember[key]; }
     }
 

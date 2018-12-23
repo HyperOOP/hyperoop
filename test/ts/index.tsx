@@ -1,4 +1,5 @@
 import * as ui from "hyperoop";
+import Hist from "redoundo";
 
 export const ref1: ui.IVirtualNode<{href: string}> = (<a href="#"/>);
 export const ref2: ui.LazyVirtualNode = () => (<a href="#"/>);
@@ -18,7 +19,7 @@ class SubActions extends ui.SubActions<any> {}
 class Actions extends ui.Actions<IState> {
     public sub: SubActions;
     constructor(s: IState) {
-        super(s, 50);
+        super(s, new Hist(50));
         this.sub = new SubActions({}, this);
     }
 }

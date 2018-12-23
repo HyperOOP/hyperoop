@@ -1,7 +1,7 @@
+import { IHistory } from "./history";
 import * as proxperty from "./proxperty";
 import { IRenderer } from "./render";
 
-import Hist from "redoundo";
 
 /** Interface of a parental `Actions` object that keeps information which
  *  is necessary to initialize `SubActions` object.
@@ -10,7 +10,7 @@ export interface IActionsParent {
     /** Renderer that should be called by any `Actions` object for page re-rendering. */
     readonly Renderer: IRenderer;
     /** Object of `redoundo.Hist` class is needed for redo/undo functionality. */
-    readonly History: Hist;
+    readonly History: IHistory;
 }
 
 /** Class of `hyperoop` top-level actions. When you properly set new values
@@ -37,7 +37,7 @@ export class Actions<S extends {}> {
     get Renderer(): IRenderer { return this.renderer; }
 
     /** Object of `redoundo.Hist` class is needed for redo/undo functionality. */
-    public readonly History: Hist;
+    public readonly History: IHistory;
 
     private orig:     S;
     private state:    S;
@@ -45,12 +45,11 @@ export class Actions<S extends {}> {
     private renderer: IRenderer;
 
     /** Construct an `Action` object, setting the initial `state` to it and optionally describing
-     *  the `hist` object of type `redoundo.Hist`. If the `hist` argument is of the `number`
-     *  type, the constructor will itself create the `History` object of the given length.
+     *  the `hist` object of type `redoundo.Hist`.
      */
-    constructor(start: S, hist?: number | Hist) {
+    constructor(start: S, hist?: IHistory) {
         this.orig    = start;
-        this.History = typeof hist === "number" ? new Hist(hist) : hist;
+        this.History = hist;
         this.init({scheduleRender: () => null});
     }
 

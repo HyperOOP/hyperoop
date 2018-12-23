@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
@@ -39,13 +39,14 @@
     "test:one": "tsc -p tsconfig.test.json && jest --env=jsdom -t ",
     "test:ts": "tsc -p test/ts",
     "clean:dist": "rimraf ./dist",
-    "clean:all": "rimraf ./dist ./node_modules ./docs ./coverage ./rpt2_cache"
+    "clean:all": "rimraf ./dist ./node_modules ./docs ./coverage ./.rpt2_cache"
   },
   "author": "Osman Bineev",
   "devDependencies": {
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0",
+    "redoundo": "^0.1.11",
     "rimraf": "^2.6.2",
     "rollup": "^0.67.0",
     "rollup-plugin-gzip": "^2.0.0",
@@ -56,9 +57,6 @@
     "typedoc": "^0.13.0",
     "typedoc-plugin-markdown": "^1.1.18",
     "typescript": "^3.0.1"
-  },
-  "dependencies": {
-    "redoundo": "^0.1.11"
   },
   "babel": {
     "presets": "env",

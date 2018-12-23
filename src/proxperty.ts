@@ -1,4 +1,4 @@
-import Hist from "redoundo";
+import { IHistory } from "./history";
 
 /**
  * Creates Proxy that calls `after` callback after set or delete entries of a `target`.
@@ -34,7 +34,7 @@ export function make<T extends object>(target: T, after: () => void): T {
  * @param after callback to execute after set or delete entries of `target`
  * @param hist `redoundo.Hist` object
  */
-export function makeH<T extends object>(target: T, after: () => void, hist: Hist): T {
+export function makeH<T extends object>(target: T, after: () => void, hist: IHistory): T {
     if (!hist) { return null; }
     return new Proxy<T>(target, {
         set: (t, k, v) => {
