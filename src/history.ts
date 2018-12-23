@@ -1,13 +1,13 @@
 
-/** Record of actions history implemented in `redoundo.Hist` */
+/** Record of actions history implemented in `redoundo.Hist`. */
 export interface IRecord {
-    /** What will be done */
+    /** What will be done. */
     Redo: ()=>void;
-    /** What will be undone then */
+    /** What will be undone then. */
     Undo: ()=>void;
 };
 
-/** Interface of `redoundo.Hist` object*/
+/** Interface of `redoundo.Hist` object. */
 export interface IHistory {
     /** Add new record to a history, then `r.Redo()` will be called automatically. */
     add(r: IRecord);
@@ -17,5 +17,9 @@ export interface IHistory {
     redo();
     /** Clean the history. */
     clean();
+    /** Length of undoing history. */
+    readonly UndoLength: number;
+    /** Length of redoing history. */
+    readonly RedoLength: number;
 }
 
