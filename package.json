@@ -31,9 +31,10 @@
     "docs:json": "typedoc --json ./docs/docs.json ./src",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "build:es": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.es.js -m -f es -n hyperoop",
-    "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -m -f umd -n hyperoop",
-    "build:min": "rollup -c rollup.config.minify.js -i src/hyperoop.ts -o dist/hyperoop.min.js -m -f umd -n hyperoop",
-    "build": "npm run clean:dist && npm run build:es && npm run build:umd && npm run build:min",
+    "build:umd": "rollup -c -i src/hyperoop.ts -o dist/hyperoop.umd.js -f umd -n hyperoop",
+    "minify": "uglifyjs --mangle -c \"sequences,dead_code,conditionals,booleans,unused,if_return,join_vars\" -o dist/hyperoop.min.js -- dist/hyperoop.umd.js",
+    "build": "npm run clean:dist && npm run build:es && npm run build:umd && npm run minify",
+    "gz": "gzip < dist/hyperoop.min.js > dist/hyperoop.min.js.gz",
     "test:jest": "tsc -p tsconfig.test.json && jest --coverage --env=jsdom",
     "test": "npm run test:jest && npm run test:ts",
     "test:one": "tsc -p tsconfig.test.json && jest --env=jsdom -t ",
@@ -52,11 +53,11 @@
     "rollup-plugin-gzip": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-typescript2": "^0.17.2",
-    "rollup-plugin-uglify": "^6.0.0",
     "tslint": "^5.11.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-markdown": "^1.1.18",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "uglify-js": "^3.4.9"
   },
   "babel": {
     "presets": "env",
