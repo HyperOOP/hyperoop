@@ -12,7 +12,7 @@
 <p align="center"><a href="https://liberapay.com/algebrain/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></p>
 
 #
-<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/logo.png?raw=true"/>
+<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/misc/logo.png?raw=true"/>
 <h1 align="center">hyperoop</h1>
 </p>
 
