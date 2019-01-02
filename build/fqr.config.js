@@ -5,7 +5,7 @@ const { minify } = require("faqtor-of-uglify");
 const { compress } = require("faqtor-of-gzip");
 const { lock, publish } = require("faqtor-of-publish");
 const { seq, cmd } = require("faqtor");
-1
+
 const
     input = "src/**/*",
     hyperoop = "hyperoop",
@@ -19,17 +19,11 @@ const
     toClean = ["dist", "test/dist"],
     toWipe = toClean.concat(["./node_modules", "./coverage", "./.rpt2_cache"]);
 
-const tsconfigBuild = {
-    include: [
-        "src/**/*"
-    ],
-};
-
 const rollupPlugins = [
     typescript({
         typescript: require('typescript'),
         tsconfig: "./tsconfig.json",
-        tsconfigOverride: tsconfigBuild,
+        tsconfigOverride: { include: [input] },
     }),
     resolve(),
 ];
