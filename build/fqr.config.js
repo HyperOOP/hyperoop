@@ -53,14 +53,28 @@ const rollupUmdCfg = {
 const tsc = (project) => cmd(`tsc -p ${project}`)
 
 const
-    buildEs = roll(rollupEsCfg).factor(input, hyperoopEs),
-    buildUmd = roll(rollupUmdCfg).factor(input, hyperoopUmd),
-    uglify = minify(hyperoopUmd, hyperoopMin).factor(),
-    gzip = compress(hyperoopMin, `${hyperoopMin}.gz`).factor(),
-    locker = lock(...pubArgs).factor(),
-    buildTest = tsc(tsconfigTest),
-    jest = cmd(`jest --coverage --env=jsdom`),
-    testTs = tsc("test/ts"),
+    buildEs = roll(rollupEsCfg)
+        .factor(input, hyperoopEs)
+        .task("building ES module"),
+    buildUmd = roll(rollupUmdCfg)
+        .factor(input, hyperoopUmd)
+        .task("building UMD module"),
+    uglify = minify(hyperoopUmd, hyperoopMin)
+        .factor()
+        .task("uglifying UMD module"),
+    gzip = compress(hyperoopMin, `${hyperoopMin}.gz`)
+        .factor()
+        .task("compressing minified module"),
+    locker = lock(...pubArgs)
+        .factor()
+        .task("lock distribution files list"),
+    buildTest = tsc(tsconfigTest)
+        .factor(input, "test/dist/**/*")
+        .task("building test files"),
+    jest = cmd(`jest --coverage --env=jsdom`)
+        .task("'jest' testing"),
+    testTs = tsc("test/ts")
+        .task("testing TypeScript types"),
     clean = cmd(`rimraf ${toClean.join(" ")}`),
     wipe = cmd(`rimraf ${toWipe.join(" ")}`);
 

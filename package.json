@@ -1,6 +1,6 @@
 {
   "name": "hyperoop",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
@@ -27,16 +27,16 @@
   ],
   "scripts": {
     "build": "fqr build",
-    "test":  "fqr test",
-    "pub":   "fqr publish",
+    "test": "fqr test",
+    "pub": "fqr publish",
     "clean": "fqr clean",
-    "wipe":  "fqr wipe"
+    "wipe": "fqr wipe"
   },
   "author": "Osman Bineev",
   "devDependencies": {
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.7.0",
-    "faqtor": "0.0.7",
+    "faqtor": "0.1.0",
     "faqtor-of-gzip": "0.0.2",
     "faqtor-of-publish": "0.0.3",
     "faqtor-of-rollup": "0.0.4",
