@@ -28,29 +28,21 @@ const rollupPlugins = [
     resolve(),
 ];
 
-const rollupEsCfg = {
+const rollupCfg = (format) => ({
     input: hyperoopSrc,
     output: {
-        file: hyperoopEs,
-        format: "es",
+        file: format === "es" ? hyperoopEs : hyperoopUmd,
+        format,
         name: hyperoop,
         sourcemap: true,
     },
     plugins: rollupPlugins
-}
+})
 
-const rollupUmdCfg = {
-    input: hyperoopSrc,
-    output: {
-        file: hyperoopUmd,
-        format: "umd",
-        name: hyperoop,
-        sourcemap: true,
-    },
-    plugins: rollupPlugins
-}
+const rollupEsCfg = rollupCfg("es");
+const rollupUmdCfg = rollupCfg("umd");
 
-const tsc = (project) => cmd(`tsc -p ${project}`)
+const tsc = (project) => cmd(`tsc -p ${project}`);
 
 const
     buildEs = roll(rollupEsCfg)
