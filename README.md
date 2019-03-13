@@ -1,8 +1,8 @@
 <p align="center">
-<a href="https://travis-ci.org/algebraic-brain/hyperoop"><img src="https://travis-ci.org/algebraic-brain/hyperoop.svg?branch=master" alt="Build Status"></a>
-<a href="https://codecov.io/gh/algebraic-brain/hyperoop"><img src="https://codecov.io/gh/algebraic-brain/hyperoop/branch/master/graph/badge.svg" alt="codecov"/></a>
+<a href="https://travis-ci.org/HyperOOP/hyperoop"><img src="https://travis-ci.org/HyperOOP/hyperoop.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/HyperOOP/hyperoop"><img src="https://codecov.io/gh/HyperOOP/hyperoop/branch/master/graph/badge.svg" alt="codecov"/></a>
 <a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/v/hyperoop.svg" alt="npm"/></a>
-<a href="https://github.com/algebraic-brain/hyperoop"><img src="https://img.shields.io/github/languages/top/algebraic-brain/hyperoop.svg" alt="GitHub top language"/></a>
+<a href="https://github.com/HyperOOP/hyperoop"><img src="https://img.shields.io/github/languages/top/HyperOOP/hyperoop.svg" alt="GitHub top language"/></a>
 <a href="https://www.npmjs.com/package/hyperoop"><img src="https://img.shields.io/npm/dt/hyperoop.svg" alt="npm"/></a>
 <a href="https://snyk.io/test/npm/hyperoop"><img src="https://snyk.io/test/npm/hyperoop/badge.svg" alt="Known Vulnerabilities"/></a>
 <a href="https://gitter.im/hyper-oop/hyperoop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/hyper-oop/hyperoop.svg" alt="Join the chat at https://gitter.im/hyper-oop"/></a>
@@ -12,7 +12,7 @@
 <p align="center"><a href="https://liberapay.com/algebrain/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></p>
 
 #
-<p align="center"><img width=50 src="https://github.com/algebraic-brain/hyperoop/blob/master/misc/logo.png?raw=true"/>
+<p align="center"><img width=50 src="https://github.com/HyperOOP/hyperoop/blob/master/misc/logo.png?raw=true"/>
 <h1 align="center">hyperoop</h1>
 </p>
 
@@ -30,16 +30,16 @@ npm i --save hyperoop
 
 ## Examples
 
-See [examples](https://github.com/algebraic-brain/hyperoop-examples).
+See [examples](https://github.com/HyperOOP/hyperoop-examples).
 
-More advanced example is [source code](https://github.com/algebraic-brain/hyperoop-site) of our site [hyperoop.github.io](https://hyperoop.github.io).
+More advanced example is [source code](https://github.com/HyperOOP/hyperoop-site) of our site [hyperoop.github.io](https://hyperoop.github.io).
 
 ### Run example
 
 To run `todo-hist` example:
 
 ```bash
-git clone https://github.com/algebraic-brain/hyperoop-examples
+git clone https://github.com/HyperOOP/hyperoop-examples
 cd hyperoop-examples/todo-hist
 npm i && npm run serve
 ```

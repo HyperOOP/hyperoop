@@ -1,10 +1,10 @@
 {
   "name": "hyperoop",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "OOP-style web micro-framework over hyperapp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/algebraic-brain/hyperoop"
+    "url": "https://github.com/HyperOOP/hyperoop"
   },
   "homepage": "https://hyperoop.github.io",
   "license": "MIT",
@@ -34,24 +34,28 @@
   },
   "author": "Osman Bineev",
   "devDependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.7.0",
-    "faqtor": "0.1.0",
+    "faqtor": "0.2.1",
     "faqtor-of-gzip": "0.0.2",
     "faqtor-of-publish": "0.0.3",
     "faqtor-of-rollup": "0.0.4",
     "faqtor-of-uglify": "0.0.2",
-    "fqr": "0.0.4",
-    "jest": "^23.6.0",
-    "redoundo": "^0.1.11",
-    "rimraf": "^2.6.2",
-    "rollup": "^0.67.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-typescript2": "^0.17.2",
-    "typescript": "^3.0.1"
+    "fqr": "0.0.6",
+    "jest": "^24.5.0",
+    "redoundo": "^0.1.13",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.19.0",
+    "typescript": "^3.3.3333"
   },
   "babel": {
-    "presets": "env",
+    "presets": [
+      "@babel/preset-env"
+    ],
     "plugins": [
       [
         "transform-react-jsx",

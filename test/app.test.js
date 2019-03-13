@@ -1,3 +1,5 @@
+require("@babel/polyfill");
+
 const ui = require("./dist/hyperoop");
 const utils = require("./utils");
 

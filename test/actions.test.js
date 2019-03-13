@@ -1,6 +1,8 @@
+require("@babel/polyfill");
+
 const ui = require("./dist/hyperoop");
 const utils = require("./utils");
-const Hist = require("redoundo")
+const Hist = require("redoundo");
 
 test("sync updates simple", (done) => {
     const actions = new utils.Actions({value: 1});
