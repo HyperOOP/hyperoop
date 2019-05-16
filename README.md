@@ -18,9 +18,14 @@
 
 Hyperoop is OOP-style SPA micro-framework.
 
-## Status
+## Quick start
 
-Under development
+```
+git clone https://github.com/HyperOOP/starter myapp
+cd myapp
+npm i
+npm start
+```
 
 ## Install
 
