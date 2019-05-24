@@ -18,6 +18,21 @@
 
 Hyperoop is OOP-style SPA micro-framework.
 
+# Contents
+ * [Motivation](#motivation)
+ * [Quick start](#quickstart)
+ * [Installation](#motivation)
+ * [Examples](#examples)
+ * [Router](#router)
+
+## Motivation
+
+- Modularity &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, wich eill be explained below.
+
+- Minimalism &mdash; I tried to isolate and implement only the most necessary functions of the state machine. In addition, the finished distribution is quite small - version 1.0.0 in the minified and gz-compressed form has a size of only 2.6K
+
+- Simple but sufficiend VDOM &mdash; HyperOOP inherits it from the brilliant (hyperapp)[https://github.com/jorgebucaran/hyperapp].
+
 ## Quick start
 
 ```
@@ -27,11 +42,26 @@ npm i
 npm start
 ```
 
-## Install
+Then open `src\index.tsx` and implement what you want. This starter code uses (faqtor)[https://github.com/faqtor/faqtor/] task runner.
+
+## Installation
 
 ```bash
 npm i --save hyperoop
 ```
+
+Then import HyperOOP:
+
+```typescript
+import { h } from "hyperoop";
+```
+
+In this case the field `jsxFactory` in your `tsconfig.json` should be `h`. But usually you need soma other entities from the library, in this case the following import clause would be simples:
+
+```typescript
+import * as ui from "hyperoop";
+```
+Don't forget to change the `jsxFactory` field to `ui.h`.
 
 ## Examples
 
