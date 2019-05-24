@@ -31,7 +31,7 @@ Hyperoop is OOP-style SPA micro-framework.
 
 - Minimalism &mdash; I tried to isolate and implement only the most necessary functions of the state machine. In addition, the finished distribution is quite small - version 1.0.0 in the minified and gz-compressed form has a size of only 2.6K
 
-- Simple but sufficiend VDOM &mdash; HyperOOP inherits it from the brilliant (hyperapp)[https://github.com/jorgebucaran/hyperapp].
+- Simple but sufficiend VDOM &mdash; HyperOOP inherits it from the brilliant [hyperapp](https://github.com/jorgebucaran/hyperapp).
 
 ## Quick start
 
@@ -42,7 +42,7 @@ npm i
 npm start
 ```
 
-Then open `src\index.tsx` and implement what you want. This starter code uses (faqtor)[https://github.com/faqtor/faqtor/] task runner.
+Then open `src\index.tsx` and implement what you want. This starter code uses [faqtor](https://github.com/faqtor/faqtor/) task runner.
 
 ## Installation
 
