@@ -20,10 +20,14 @@ Hyperoop is OOP-style SPA micro-framework.
 
 ## Contents
  * [Motivation](#motivation)
- * [Quick start](#quickstart)
+ * [Quick start](#quick-start)
  * [Installation](#motivation)
- * [Getting help](#gettinghelp)
+ * [Getting help](#getting-help)
+ * [HyperOOP application: basics](#hyperoop-application-basics)
+   * [TODO...](#todo)
  * [Examples](#examples)
+   * [Run example](#run-example)
+   * [Example `counter`](#example-counter)
  * [Router](#router)
 
 ## Motivation
@@ -71,9 +75,9 @@ Any question about using the framework you can ask [here](https://gitter.im/hype
 
 ## HyperOOP application: basics
 
-The application consists of a single state tree managed by action classes, and a view that defines UI. Every time a state changes, HyperOOP creates a new virtual DOM and uses it to update the actual DOM. 
+An application consists of states that are managed by action classes organized as a tree, and a view that defines a user interface. Every time a state changes, HyperOOP creates a new virtual DOM and uses it to update the actual DOM.
 
-## TODO...
+### TODO...
 
 ## Examples
 
