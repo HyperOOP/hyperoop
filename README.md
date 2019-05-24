@@ -30,6 +30,8 @@ Hyperoop is OOP-style SPA micro-framework.
    * [Example `counter`](#example-counter)
  * [Router](#router)
 
+> __Note!__ In the following text I assume you know [TypeScript](https://www.typescriptlang.org/) and how to configure, build and bundle it.
+
 ## Motivation
 
 - __Modularity__ &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, wich eill be explained below.
@@ -47,7 +49,7 @@ npm i
 npm start
 ```
 
-Then open `src\index.tsx` and implement what you want. This starter code uses [faqtor](https://github.com/faqtor/faqtor/) task runner.
+Then open `src\index.tsx` and implement what you want. This starter code uses [faqtor](https://github.com/faqtor/faqtor/) task runner and [Rollup](https://rollupjs.org) module bundler.
 
 ## Installation
 
@@ -67,7 +69,7 @@ In this case the field `jsxFactory` in your `tsconfig.json` should be `h`. But u
 import * as ui from "hyperoop";
 ```
 
-Don't forget to change the `jsxFactory` field to `ui.h`.
+Don't forget to change the `jsxFactory` field of your `tsconfig.json` to `ui.h`.
 
 ## Getting help
 
@@ -77,7 +79,21 @@ Any question about using the framework you can ask [here](https://gitter.im/hype
 
 An application consists of states that are managed by action classes organized as a tree, and a view that defines a user interface. Every time a state changes, HyperOOP creates a new virtual DOM and uses it to update the actual DOM.
 
-### TODO...
+### `Action` class and state.
+
+First of all you need to define your own class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the counter:
+
+```TypeScript
+class Counter extends ui.Actions<{count: number}> {}
+```
+
+As you see, the first parameter of the class `ui.Action` is type of counter state: `{count: number}`.
+
+TODO...
+
+### REndering a page
+
+TODO...
 
 ## Examples
 
