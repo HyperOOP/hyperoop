@@ -21,7 +21,7 @@ Hyperoop is OOP-style SPA micro-framework.
 ## Contents
  * [Motivation](#motivation)
  * [Quick start](#quick-start)
- * [Installation](#motivation)
+ * [Installation](#installation)
  * [Getting help](#getting-help)
  * [HyperOOP application: basics](#hyperoop-application-basics)
    * [`Action` class and state](#action-class-and-state)
