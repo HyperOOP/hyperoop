@@ -24,6 +24,7 @@ Hyperoop is OOP-style SPA micro-framework.
  * [Installation](#motivation)
  * [Getting help](#getting-help)
  * [HyperOOP application: basics](#hyperoop-application-basics)
+   * [`Action` class and state](#action-class-and-state)
    * [TODO...](#todo)
  * [Examples](#examples)
    * [Run example](#run-example)
@@ -34,9 +35,9 @@ Hyperoop is OOP-style SPA micro-framework.
 
 ## Motivation
 
-- __Modularity__ &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, wich eill be explained below.
+- __Modularity__ &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, wich will be explained below.
 
-- __Minimalism__ &mdash; I tried to isolate and implement only the most necessary functions of the state machine. In addition, the finished distribution is quite small - version 1.0.0 in the minified and gz-compressed form has a size of only 2.6K
+- __Minimalism__ &mdash; I tried to isolate and implement only the most necessary functions of the state machine. In addition, the finished distribution is quite small - version 1.0.0 in the form of minified and gz-compressed bundle has a size of only 2.6K
 
 - __Simple but sufficient VDOM__ &mdash; HyperOOP inherits it from the brilliant [hyperapp](https://github.com/jorgebucaran/hyperapp).
 
@@ -79,7 +80,7 @@ Any question about using the framework you can ask [here](https://gitter.im/hype
 
 An application consists of states that are managed by action classes organized as a tree, and a view that defines a user interface. Every time a state changes, HyperOOP creates a new virtual DOM and uses it to update the actual DOM.
 
-### `Action` class and state.
+### `Action` class and state
 
 First of all you need to define your own class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the counter:
 
@@ -87,11 +88,18 @@ First of all you need to define your own class of actions, inherited from HyperO
 class Counter extends ui.Actions<{count: number}> {}
 ```
 
-As you see, the first parameter of the class `ui.Action` is type of counter state: `{count: number}`.
+As you see, the parameter of the class `ui.Action` is type of our counter state: `{count: number}`. Then after instantiating `Counter` we may use the memeber `State` for accessing `count`:
 
-TODO...
+```TypeScript
+class Counter extends ui.Actions<{count: number}> {}
 
-### REndering a page
+const counter = new Counter({ count: 0 });
+
+counter.State.count = 2;
+```
+But it is pointless to do this until we initialize the view and associate the view with the action class.
+
+### Rendering a page
 
 TODO...
 
