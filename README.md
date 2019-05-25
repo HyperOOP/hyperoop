@@ -63,9 +63,9 @@ Then, using your usual bundler, import HyperOOP into your application:
 import * as ui from "hyperoop"
 ```
 
-If you want to use the jsx syntax, then the `jsxFactory` field in your` tsconfig.json` should be `ui.h`
+Note, that if you want to use the jsx syntax, then the `jsxFactory` field in your` tsconfig.json` should be `ui.h`
 
-If you do not want to set up a build step, you can import Hyperapp in the <script> tag as a module:
+If you do not plan to set up a the build step, you can import Hyperapp into the <script> tag as a module:
   
  ```html
 <script type="module">
