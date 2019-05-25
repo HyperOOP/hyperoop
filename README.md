@@ -57,20 +57,21 @@ Then open `src\index.tsx` and implement what you want. This starter code uses [f
 ```bash
 npm i --save hyperoop
 ```
+Then, using your usual bundler, import HyperOOP into your application:
 
-Then import HyperOOP:
-
-```typescript
-import { h } from "hyperoop";
+```TypeScript
+import * as ui from "hyperoop"
 ```
 
-In this case the field `jsxFactory` in your `tsconfig.json` should be `h`. But usually you need some other entities from the library, in this case the following import clause would be simpler:
+If you want to use the jsx syntax, then the `jsxFactory` field in your` tsconfig.json` should be `ui.h`
 
-```typescript
-import * as ui from "hyperoop";
+If you do not want to set up a build step, you can import Hyperapp in the <script> tag as a module:
+  
+ ```html
+<script type="module">
+  import * as ui from "https://unpkg.com/hyperoop?module"
+</script>
 ```
-
-Don't forget to change the `jsxFactory` field of your `tsconfig.json` to `ui.h`.
 
 ## Getting help
 
