@@ -50,7 +50,7 @@ npm i
 npm start
 ```
 
-Then open `src\index.tsx` and implement what you want. This starter code uses [Faqtor](https://github.com/faqtor/faqtor/) task runner and [Rollup](https://rollupjs.org) module bundler.
+Then open `src/index.tsx` and implement what you want. This starter code uses [Faqtor](https://github.com/faqtor/faqtor/) task runner and [Rollup](https://rollupjs.org) module bundler.
 
 ## Installation
 
