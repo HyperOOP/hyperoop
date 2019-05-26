@@ -181,7 +181,7 @@ However, the rules for changing states remain the same as in other frameworks: t
 ```tsx
 counter.State.top.count = 10; //WRONG! This code will not cause new rendering
 
-counter.State = {counter.State..., top: {count: 10}}; //CORRECT!
+counter.State = {...counter.State, top: {count: 10}}; //CORRECT!
 ```
 
 ### SubActions
@@ -221,6 +221,9 @@ Note that since we inherit every element of the list from the `SubActions` class
 ```tsx
         const newItem = new Element(true, this);
 ```
+
+For a better understanding of this paragraph, study the online [Todo example](https://codepen.io/algebrain/pen/GwZWLg).
+
 
 ### Components
 
