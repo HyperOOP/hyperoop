@@ -186,7 +186,7 @@ counter.State = {counter.State..., top: {count: 10}}; //CORRECT!
 
 ### SubActions
 
-Sometimes it is convenient to organize in the form of a tree not states, but instances of the Actions class. Imagine that we need to program a list that can be filtered by some Boolean attribute of a list element:
+Sometimes it is convenient to organize in the form of a tree not states, but instances of the `Actions` class. Imagine that we need to program a list that can be filtered by some boolean attribute of a list element:
 
 ```tsx
 import * as ui from 'hyperoop';
@@ -200,11 +200,25 @@ class Element extends ui.SubActions<IElementState> {}
 
 interface IMainState = {
    showFiltered: boolean;
+   items:        Element[];
    ...
 }
 
-class List extends ui.Actions<IMainState> {}
+class List extends ui.Actions<IMainState> {
+    addItem() {
+        const newItem = new Element(true, this);
+    }
+}
 
+...
+
+ui.init(document.body, view, new List());
+
+```
+Обратите внимание, что поскольку мы наследуем каждый элемент списка от класса SubActions, нам не нужно вызывать ui.init для каждого такого элемента, поскольку эта инициализация наследуется при создании от родительского списка:
+
+```tsx
+        const newItem = new Element(true, <b>this</b>);
 ```
 
 ## Examples
