@@ -224,7 +224,7 @@ Note that since we inherit every element of the list from the `SubActions` class
 
 ### Components
 
-Since the idea and implementation of components is completely inherited from hyperapp, it is best to read the component documentation [here](https://github.com/jorgebucaran/hyperapp/tree/1.2.9#components).
+Since the idea and implementation of components is completely inherited from [hyperapp](https://github.com/jorgebucaran/hyperapp), it is best to read the component documentation [here](https://github.com/jorgebucaran/hyperapp/tree/1.2.9#components).
 
 ## Examples
 
