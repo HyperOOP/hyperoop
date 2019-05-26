@@ -43,17 +43,20 @@ Hyperoop is OOP-style SPA micro-framework.
 
 ## Quick start
 
-```
+Type the following commands in the shell:
+
+```bash
 git clone https://github.com/HyperOOP/starter myapp
 cd myapp
 npm i
 npm start
 ```
 
-Then open `src/index.tsx` and implement what you want. This starter code uses [Faqtor](https://github.com/faqtor/faqtor/) task runner and [Rollup](https://rollupjs.org) module bundler.
+Then open `src/index.tsx` for editing and implement what you want. This starter code uses [Faqtor](https://github.com/faqtor/faqtor/) task runner and [Rollup](https://rollupjs.org) module bundler.
 
 ## Installation
 
+Type the following command in the shell:
 ```bash
 npm i --save hyperoop
 ```
@@ -63,9 +66,9 @@ Then, using your usual bundler, import HyperOOP into your application:
 import * as ui from "hyperoop"
 ```
 
-Note, that if you want to use the jsx syntax, then the `jsxFactory` field in your` tsconfig.json` should be `ui.h`
+Note that if you want to use the jsx syntax, then the `jsxFactory` field in your` tsconfig.json` should be `ui.h`
 
-If you do not plan to set up a the build step, you can import Hyperapp into the <script> tag as a module:
+If you do not plan to set up the build step, you can import Hyperapp into the <script> tag as a module:
   
  ```html
 <script type="module">
@@ -83,7 +86,7 @@ An application consists of states that are managed by action classes organized a
 
 ### `Action` class and state
 
-First of all you need to define your own class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the counter:
+First you need to define a class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the [counter](https://codepen.io/algebrain/pen/OaNgMv):
 
 ```TypeScript
 class Counter extends ui.Actions<{count: number}> {}
@@ -92,11 +95,9 @@ class Counter extends ui.Actions<{count: number}> {}
 As you see, the parameter of the class `ui.Action` is type of our counter state: `{count: number}`. Then after instantiating `Counter` we may use the memeber `State` for accessing `count`:
 
 ```TypeScript
-class Counter extends ui.Actions<{count: number}> {}
-
 const counter = new Counter({ count: 0 });
 
-counter.State.count = 2;
+//counter.State.count = 2;
 ```
 But it is pointless to do this until we initialize the view and associate the view with the action class.
 
