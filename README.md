@@ -86,7 +86,7 @@ An application consists of states that are managed by action classes organized a
 
 ### `Action` class and state
 
-First you need to define a class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the [counter](https://codepen.io/algebrain/pen/OaNgMv):
+First you need to define a class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the [counter](https://github.com/HyperOOP/hyperoop-examples/blob/master/counter/src/index.tsx):
 
 ```TypeScript
 class Counter extends ui.Actions<{count: number}> {}
@@ -103,7 +103,19 @@ But it is pointless to do this until we initialize the view and associate the vi
 
 ### Rendering a page
 
-TODO...
+When describing the page content, we use the h function to create a virtual DOM. However, thanks to the jsx (tsx) syntax, it is possible to describe the VDOM as if we were writing the code for an html page:
+
+```tsx
+const view = () => (
+<div>
+    <h1>{counter.State.count}</h1>
+    <button onclick={() => counter.State.count--}>-</button>
+    <button onclick={() => counter.State.count++}>+</button>
+</div>
+);
+```
+Here, `view` is a function that will be called each time a state changes and form a new VDOM, which will then be displayed on the page by creating a real DOM.
+
 
 ## Examples
 
