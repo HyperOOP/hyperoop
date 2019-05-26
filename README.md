@@ -24,7 +24,7 @@ Hyperoop is OOP-style SPA micro-framework.
  * [Installation](#installation)
  * [Getting help](#getting-help)
  * [HyperOOP application: basics](#hyperoop-application-basics)
-   * [`Action` class and state](#action-class-and-state)
+   * [`Actions` class and state](#actionsss-class-and-state)
    * [Rendering a page](#rendering-a-page)
    * [TODO...](#todo)
  * [Examples](#examples)
@@ -85,15 +85,15 @@ Any question about using the framework you can ask [here](https://gitter.im/hype
 
 An application consists of states that are managed by action classes organized as a tree, and a view that defines a user interface. Every time a state changes, HyperOOP creates a new virtual DOM and uses it to update the actual DOM.
 
-### `Action` class and state
+### `Actions` class and state
 
-First you need to define a class of actions, inherited from HyperOOP `Action` class. Let's see how this is implemented on the example of the [counter](https://github.com/HyperOOP/hyperoop-examples/blob/master/counter/src/index.tsx):
+First you need to define a class of actions, inherited from HyperOOP `Actions` class. Let's see how this is implemented on the example of the [counter](https://github.com/HyperOOP/hyperoop-examples/blob/master/counter/src/index.tsx):
 
 ```TypeScript
 class Counter extends ui.Actions<{count: number}> {}
 ```
 
-As you see, the parameter of the class `ui.Action` is type of our counter state: `{count: number}`. Then after instantiating `Counter` we may use the memeber `State` for accessing `count`:
+As you see, the parameter of the class `ui.Actions` is type of our counter state: `{count: number}`. Then after instantiating `Counter` we may use the memeber `State` for accessing `count`:
 
 ```TypeScript
 const counter = new Counter({ count: 0 });
@@ -130,7 +130,7 @@ Here the `h1` tag displays the current value of the counter. Each time `counter.
     <button onclick={() => counter.State.count++}>+</button>
 ```
 
-These two buttons allow to increase and decrease the counter value. Thanks to the magic of the `Action` class, this will lead to a redraw of the page with a new counter value.
+These two buttons allow to increase and decrease the counter value. Thanks to the magic of the `Actions` class, this will lead to a redraw of the page with a new counter value.
 
 But all this will not work unless we bind an instance of the `Actio`n class and the view function to the required DOM element. This is done by calling the `init` function:
 
