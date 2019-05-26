@@ -27,10 +27,10 @@ Hyperoop is OOP-style SPA micro-framework.
    * [`Actions` class and state](#actionsss-class-and-state)
    * [Rendering a page](#rendering-a-page)
    * [State](#state)
-   * [TODO...](#todo)
+   * [SubActions](#subactions)
+   * [Components](#components)
  * [Examples](#examples)
    * [Run example](#run-example)
-   * [Example `counter`](#example-counter)
  * [Router](#router)
 
 > __Note!__ In the following text I assume you know [TypeScript](https://www.typescriptlang.org/) and how to configure, build and bundle it.
@@ -215,11 +215,16 @@ class List extends ui.Actions<IMainState> {
 ui.init(document.body, view, new List());
 
 ```
-Обратите внимание, что поскольку мы наследуем каждый элемент списка от класса SubActions, нам не нужно вызывать ui.init для каждого такого элемента, поскольку эта инициализация наследуется при создании от родительского списка:
+
+Note that since we inherit every element of the list from the `SubActions` class, we do not need to call `ui.init` for each such element, since this initialization is inherited from the parent list when it is created:
 
 ```tsx
-        const newItem = new Element(true, <b>this</b>);
+        const newItem = new Element(true, this);
 ```
+
+### Components
+
+Since the idea and implementation of components is completely inherited from hyperapp, it is best to read the component documentation [here](https://github.com/jorgebucaran/hyperapp/tree/1.2.9#components).
 
 ## Examples
 
