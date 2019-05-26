@@ -26,6 +26,7 @@ Hyperoop is OOP-style SPA micro-framework.
  * [HyperOOP application: basics](#hyperoop-application-basics)
    * [`Actions` class and state](#actionsss-class-and-state)
    * [Rendering a page](#rendering-a-page)
+   * [State](#state)
    * [TODO...](#todo)
  * [Examples](#examples)
    * [Run example](#run-example)
@@ -156,6 +157,54 @@ const view = () => (
 );
 
 ui.init(document.body, view, counter);
+```
+
+### State
+
+Unlike many other frameworks, HyperOOP does not have a single state tree. Each class instance controls its state, which can be any regular JavaScript object:
+
+```tsx
+const state = {
+    top: {
+        count: 0
+    },
+    bottom: {
+        count: 0
+    }
+}
+
+counter = new ui.Actions(state);
+```
+
+However, the rules for changing states remain the same as in other frameworks: the state can only be changed as a whole:
+
+```tsx
+counter.State.top.count = 10; //WRONG! This code will not cause new rendering
+
+counter.State = {counter.State..., top: {count: 10}}; //CORRECT!
+```
+
+### SubActions
+
+Sometimes it is convenient to organize in the form of a tree not states, but instances of the Actions class. Imagine that we need to program a list that can be filtered by some Boolean attribute of a list element:
+
+```tsx
+import * as ui from 'hyperoop';
+
+interface IElementState = {
+    filtered: boolean;
+    ...
+}
+
+class Element extends ui.SubActions<IElementState> {}
+
+interface IMainState = {
+   showFiltered: boolean;
+   ...
+}
+
+class List extends ui.Actions<IMainState> {}
+
 ```
 
 ## Examples
