@@ -133,7 +133,7 @@ Here the `h1` tag displays the current value of the counter. Each time `counter.
 
 These two buttons allow to increase and decrease the counter value. Thanks to the magic of the `Actions` class, this will lead to a redraw of the page with a new counter value.
 
-But all this will not work unless we bind an instance of the `Actio`n class and the view function to the required DOM element. This is done by calling the `init` function:
+But all this will not work unless we bind an instance of the `Action` class and the `view` function to the required DOM element. This is done by calling the `init` function:
 
 ```tsx
     ui.init(document.body, view, counter);
