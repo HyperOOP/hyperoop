@@ -104,7 +104,7 @@ But it is pointless to do this until we initialize the view and associate the vi
 
 ### Rendering a page
 
-When describing the page content, we use the h function to create a virtual DOM. However, thanks to the jsx (tsx) syntax, it is possible to describe the VDOM as if we were writing the code for an html page:
+When describing the page content, we use the `h` function to create a virtual DOM. However, thanks to the `jsx` (`tsx`) syntax, it is possible to describe the VDOM as if we were writing the code for an html page:
 
 ```tsx
 const view = () => (
@@ -130,9 +130,9 @@ Here the `h1` tag displays the current value of the counter. Each time `counter.
     <button onclick={() => counter.State.count++}>+</button>
 ```
 
-Two buttons located below allow to increase and decrease the counter value. Thanks to the magic of the `Action` class, this will lead to a redraw of the page with a new counter value.
+These two buttons allow to increase and decrease the counter value. Thanks to the magic of the `Action` class, this will lead to a redraw of the page with a new counter value.
 
-But all this will not work unless we bind an instance of the Action class and the view function to the required DOM element. This is done by calling the init function:
+But all this will not work unless we bind an instance of the `Actio`n class and the view function to the required DOM element. This is done by calling the `init` function:
 
 ```tsx
     ui.init(document.body, view, counter);
