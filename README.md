@@ -121,14 +121,42 @@ Let's analyze this code in more detail.
 
 ```tsx
     <h1>{counter.State.count}</h1>
-);
 ```
 
 Here the `h1` tag displays the current value of the counter. Each time `counter.State.count` changes, a new virtual DOM will be generated, and then it will be displayed on the page with the new counter value.
 
+```tsx
+    <button onclick={() => counter.State.count--}>-</button>
+    <button onclick={() => counter.State.count++}>+</button>
+```
 
+Two buttons located below allow to increase and decrease the counter value. Thanks to the magic of the `Action` class, this will lead to a redraw of the page with a new counter value.
 
+But all this will not work unless we bind an instance of the Action class and the view function to the required DOM element. This is done by calling the init function:
 
+```tsx
+    ui.init(document.body, view, counter);
+```
+
+Here is the full code for this example ([try online](https://codepen.io/algebrain/pen/OaNgMv)):
+
+```tsx
+import * as ui from 'hyperoop';
+
+class Counter extends ui.Actions<{count: number}> {}
+
+const counter = new Counter({ count: 0 });
+
+const view = () => (
+<div>
+    <h1>{counter.State.count}</h1>
+    <button onclick={() => counter.State.count--}>-</button>
+    <button onclick={() => counter.State.count++}>+</button>
+</div>
+);
+
+ui.init(document.body, view, counter);
+```
 
 ## Examples
 
@@ -147,28 +175,6 @@ npm i && npm run serve
 ```
 
 Then open localhost:10001 in browser. Or simply [try it online](https://codepen.io/algebrain/pen/GwZWLg)
-
-### Example `counter`
-
-`TypeScript` code ([try online](https://codepen.io/algebrain/pen/OaNgMv)):
-
-```typescript
-import * as ui from 'hyperoop';
-
-class Counter extends ui.Actions<{count: number}> {}
-
-const counter = new Counter({ count: 0 });
-
-const view = () => (
-<div>
-    <h1>{counter.State.count}</h1>
-    <button onclick={() => counter.State.count--}>-</button>
-    <button onclick={() => counter.State.count++}>+</button>
-</div>
-);
-
-ui.init(document.body, view, counter);
-```
 
 ## Router
 
