@@ -25,6 +25,7 @@ Hyperoop is OOP-style SPA micro-framework.
  * [Getting help](#getting-help)
  * [HyperOOP application: basics](#hyperoop-application-basics)
    * [`Action` class and state](#action-class-and-state)
+   * [Rendering a page](#rendeting-a-page)
    * [TODO...](#todo)
  * [Examples](#examples)
    * [Run example](#run-example)
@@ -115,6 +116,18 @@ const view = () => (
 );
 ```
 Here, `view` is a function that will be called each time a state changes and form a new VDOM, which will then be displayed on the page by creating a real DOM.
+
+Let's analyze this code in more detail.
+
+```tsx
+    <h1>{counter.State.count}</h1>
+);
+```
+
+Here the `h1` tag displays the current value of the counter. Each time `counter.State.count` changes, a new virtual DOM will be generated, and then it will be displayed on the page with the new counter value.
+
+
+
 
 
 ## Examples
