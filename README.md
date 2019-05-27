@@ -206,7 +206,7 @@ interface IMainState = {
 
 class List extends ui.Actions<IMainState> {
     addItem() {
-        const newItem = new Element(true, this);
+        const newItem = new Element({filtered: true, ...}, this);
     }
 }
 
