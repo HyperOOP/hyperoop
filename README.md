@@ -37,7 +37,7 @@ Hyperoop is OOP-style SPA micro-framework.
 
 ## Motivation
 
-- __Modularity__ &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, wich will be explained below.
+- __Modularity__ &mdash; the main idea was to implement my understanding of OOP, modularity and invariant development. It is achieved by implementing of system of Actions/SubActions, which will be explained below.
 
 - __Minimalism__ &mdash; I tried to isolate and implement only the most necessary functions of the state machine. In addition, the finished distribution is quite small - version 1.0.0 in the form of minified and gz-compressed bundle has a size of only 2.6K
 
